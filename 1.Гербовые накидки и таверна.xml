@@ -7,6 +7,51 @@
     <QuestOrder>
     	<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
     	<If Condition="Me.IsAlliance">
+        	<If Condition="(Me.FreeBagSlots &lt; 40)" >
+        		<MoveTo X="-8792.969" Y="611.1144" Z="96.77453" />
+        		<CustomBehavior File="InteractWith" MobId="1289" />
+	        	<CustomBehavior File="Misc\RunLua" NumOfTimes="15" WaitTime="2000" Lua="
+							if MerchantFrame:IsVisible()==true then
+								if buffer==nil or buffer&gt;4 then buffer=0 end
+								MerchantRepairAllButton:Click()
+								if buffer&lt;5 then
+									for s=1,GetContainerNumSlots(buffer)
+										do local n=GetContainerItemLink(buffer,s)
+											if (n and strfind(n, &quot;ff9d9d9d&quot;) or n and strfind(n, &quot;ffffffff&quot;) or n and strfind(n, &quot;ff1eff00&quot;) or n and strfind(n, &quot;ff0070dd&quot;)) and n and not n:find(&quot;103982&quot;) then
+												UseContainerItem(buffer,s)
+											end
+										end
+									buffer=buffer+1
+									end
+								end" />
+               	<MoveTo X="-8719.173" Y="474.724" Z="98.61301"  />			
+				<CustomBehavior File="InteractWith" MobId="1321" InteractByBuyingItemId="4498" WaitTime="1000"
+	                            CollectionDistance="50" X="1772.42" Y="-4511.52" Z="27.84886" />
+	            <CustomBehavior File="InteractWith" MobId="1321" InteractByBuyingItemId="4498" WaitTime="1000"
+	                            CollectionDistance="50" X="1772.42" Y="-4511.52" Z="27.84886" />
+	            <CustomBehavior File="InteractWith" MobId="1321" InteractByBuyingItemId="4498" WaitTime="1000"
+	                            CollectionDistance="50" X="1772.42" Y="-4511.52" Z="27.84886" />
+	            <CustomBehavior File="InteractWith" MobId="1321" InteractByBuyingItemId="4498" WaitTime="1000"
+	                            CollectionDistance="50" X="1772.42" Y="-4511.52" Z="27.84886" />
+            </If>		
+			<If Condition="(Me.FreeBagSlots &lt; 46)" >
+        		<MoveTo X="-8792.969" Y="611.1144" Z="96.77453" />
+        		<CustomBehavior File="InteractWith" MobId="1289" />
+	        	<CustomBehavior File="Misc\RunLua" NumOfTimes="15" WaitTime="2000" Lua="
+							if MerchantFrame:IsVisible()==true then
+								if buffer==nil or buffer&gt;4 then buffer=0 end
+								MerchantRepairAllButton:Click()
+								if buffer&lt;5 then
+									for s=1,GetContainerNumSlots(buffer)
+										do local n=GetContainerItemLink(buffer,s)
+											if (n and strfind(n, &quot;ff9d9d9d&quot;) or n and strfind(n, &quot;ffffffff&quot;) or n and strfind(n, &quot;ff1eff00&quot;) or n and strfind(n, &quot;ff0070dd&quot;)) and n and not n:find(&quot;103982&quot;) then
+												UseContainerItem(buffer,s)
+											end
+										end
+									buffer=buffer+1
+									end
+								end" />
+			</If>
             <If Condition="Me.GetReputationLevelWith(72) &lt; Styx.WoWUnitReaction.Exalted &amp;&amp; !HasItem(45574)" >
                 <MoveTo DestName="Captain Lancy Revshon in Stormwind" X="-8841.596" Y="548.8561" Z="96.64429" />
                 <CustomBehavior File="InteractWith" MobId="49877" InteractByBuyingItemId="45574"
@@ -250,6 +295,52 @@
    		</If>
 
    		<If Condition="Me.IsHorde">
+        	<If Condition="(Me.FreeBagSlots &lt; 40)" >
+        		<MoveTo X="1793.673" Y="-4562.047" Z="23.00019"   />
+        		<CustomBehavior File="InteractWith" MobId="3315" />
+	        	<CustomBehavior File="Misc\RunLua" NumOfTimes="15" WaitTime="2000" Lua="
+							if MerchantFrame:IsVisible()==true then
+								if buffer==nil or buffer&gt;4 then buffer=0 end
+								MerchantRepairAllButton:Click()
+								if buffer&lt;5 then
+									for s=1,GetContainerNumSlots(buffer)
+										do local n=GetContainerItemLink(buffer,s)
+											if (n and strfind(n, &quot;ff9d9d9d&quot;) or n and strfind(n, &quot;ffffffff&quot;) or n and strfind(n, &quot;ff1eff00&quot;) or n and strfind(n, &quot;ff0070dd&quot;)) and n and not n:find(&quot;103982&quot;) then
+												UseContainerItem(buffer,s)
+											end
+										end
+									buffer=buffer+1
+									end
+								end" />
+               				
+				<CustomBehavior File="InteractWith" MobId="3369" InteractByBuyingItemId="4498" WaitTime="1000"
+	                            CollectionDistance="50" X="1772.42" Y="-4511.52" Z="27.84886" />
+	            <CustomBehavior File="InteractWith" MobId="3369" InteractByBuyingItemId="4498" WaitTime="1000"
+	                            CollectionDistance="50" X="1772.42" Y="-4511.52" Z="27.84886" />
+	            <CustomBehavior File="InteractWith" MobId="3369" InteractByBuyingItemId="4498" WaitTime="1000"
+	                            CollectionDistance="50" X="1772.42" Y="-4511.52" Z="27.84886" />
+	            <CustomBehavior File="InteractWith" MobId="3369" InteractByBuyingItemId="4498" WaitTime="1000"
+	                            CollectionDistance="50" X="1772.42" Y="-4511.52" Z="27.84886" />
+	            <CustomBehavior File="Misc\RunLua" Lua="for bag = 0,4,1 do for slot = 1, 32, 1 do local name = GetContainerItemLink(bag,slot); if name and string.find(name,&quot;Сумка солнечного скитальца&quot;) then PickupContainerItem(bag,slot); DeleteCursorItem(); end; end; end " />		           
+	        </If>
+	        <If Condition="(Me.FreeBagSlots &lt; 46)" >
+        		<MoveTo X="1793.673" Y="-4562.047" Z="23.00019"   />
+        		<CustomBehavior File="InteractWith" MobId="3315" />
+	        	<CustomBehavior File="Misc\RunLua" NumOfTimes="15" WaitTime="2000" Lua="
+							if MerchantFrame:IsVisible()==true then
+								if buffer==nil or buffer&gt;4 then buffer=0 end
+								MerchantRepairAllButton:Click()
+								if buffer&lt;5 then
+									for s=1,GetContainerNumSlots(buffer)
+										do local n=GetContainerItemLink(buffer,s)
+											if (n and strfind(n, &quot;ff9d9d9d&quot;) or n and strfind(n, &quot;ffffffff&quot;) or n and strfind(n, &quot;ff1eff00&quot;) or n and strfind(n, &quot;ff0070dd&quot;)) and n and not n:find(&quot;103982&quot;) then
+												UseContainerItem(buffer,s)
+											end
+										end
+									buffer=buffer+1
+									end
+								end" /> 
+			</If>					                 
             <If Condition="Me.GetReputationLevelWith(76) &lt; Styx.WoWUnitReaction.Exalted &amp;&amp; !HasItem(45581)" >
                 <MoveTo DestName="Stone Guard Nargol in Orgrimmar" X="1807.692" Y="-4377.496" Z="103.1129" />
                 <CustomBehavior File="InteractWith" MobId="50488" InteractByBuyingItemId="45581" WaitTime="3000"
