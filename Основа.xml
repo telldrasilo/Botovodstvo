@@ -15,6 +15,7 @@
 
    			<If Condition="Me.Level == 15" >
    				<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
+   				<CustomBehavior File="RunMacro" Macro="/run for i=1,GetNumQuestLogEntries() do SelectQuestLogEntry(i); SetAbandonQuest(); AbandonQuest(); end" />
 				<CustomBehavior File="LoadProfile" ProfileName="1.Гербовые накидки и таверна" RememberProfile="True" />
 			</If>
    		</If>
@@ -22,10 +23,14 @@
    		<If Condition="Me.IsHorde">
        		 <If Condition="Me.Level &lt; 15" >
        		 	<CustomBehavior File="EnablePlugin" Names="LogMeOut!" />
+       		 		<If Condition="(Me.Race == WoWRace.Undead) || Me.Level &gt; 12 " >
+       		 			<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\Classic\[H - Quest] 1-58 [Kick]\[H - Quest] 12-58 K-EK [Kick]" />
+       		 		</If>
 				<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\Classic\[H - Quest] 1-58 [Kick]\[H - Quest] 1-12 Auto-Loader [Kick]" />
    			</If>
    			<If Condition="Me.Level == 15" >
    				<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
+   				<CustomBehavior File="RunMacro" Macro="/run for i=1,GetNumQuestLogEntries() do SelectQuestLogEntry(i); SetAbandonQuest(); AbandonQuest(); end" />
 				<CustomBehavior File="LoadProfile" ProfileName="1.Гербовые накидки и таверна" RememberProfile="True" />
 			</If>
    		</If>
@@ -50,6 +55,7 @@
    			</If>
 
    			<If Condition="Me.Level == 90" >
+   				<CustomBehavior File="RunMacro" Macro="/run for i=1,GetNumQuestLogEntries() do SelectQuestLogEntry(i); SetAbandonQuest(); AbandonQuest(); end" />
    				<If Condition="HasItem(6948)">
 					<CustomBehavior File="Message" Text="Using our Hearthstone." LogColor="Fuchsia" />
 					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
@@ -73,6 +79,7 @@
    			</If>
 
    			<If Condition="Me.Level == 90" >
+   				<CustomBehavior File="RunMacro" Macro="/run for i=1,GetNumQuestLogEntries() do SelectQuestLogEntry(i); SetAbandonQuest(); AbandonQuest(); end" />
    				<If Condition="HasItem(6948)">
 					<CustomBehavior File="Message" Text="Using our Hearthstone." LogColor="Fuchsia" />
 					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
