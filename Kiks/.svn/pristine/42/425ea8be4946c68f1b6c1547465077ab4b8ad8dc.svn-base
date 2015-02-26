@@ -1,0 +1,168 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../../../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <!-- Original contribution by Kickazz006 -->
+    <Name>[A - Quest] 94-96 Talador [Kick] ($Rev: 3405 $)</Name>
+
+    <MinLevel>90</MinLevel>
+    <MaxLevel>1001</MaxLevel>
+
+    <MinDurability>0.3</MinDurability>
+    <MinFreeBagSlots>3</MinFreeBagSlots>
+
+    <!-- NB: Honorbuddy sells before mailing -->
+    <SellGrey>true</SellGrey>
+    <SellWhite>true</SellWhite>
+    <SellGreen>true</SellGreen>
+    <SellBlue>false</SellBlue>
+    <SellPurple>false</SellPurple>
+
+    <MailGrey>false</MailGrey>
+    <MailWhite>true</MailWhite>
+    <MailGreen>true</MailGreen>
+    <MailBlue>true</MailBlue>
+    <MailPurple>true</MailPurple>
+
+    <TargetElites>false</TargetElites>
+
+    <AvoidMobs>
+
+    </AvoidMobs>
+
+    <Blackspots>
+
+    </Blackspots>
+
+    <Mailboxes> <!-- Need to add Mailboxes and Vendors! -->
+		<Mailbox X="3571.417" Y="1678.606" Z="172.7925" />
+    </Mailboxes>
+
+    <Vendors> <!-- Need to add Mailboxes and Vendors! -->
+		<Vendor Name="Alstan Mountainbrew" Entry="80768" Type="Repair" X="3581.345" Y="1684.74" Z="173.0399" /> <!-- Fort Wrynn -->
+		<Vendor Name="Olivia Abbington" Entry="81358" Type="Food" X="3563.78" Y="1675.731" Z="173.804" /> <!-- Fort Wrynn -->
+    </Vendors>
+
+    <!-- BEGIN: Quest Overrides -->
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+   <!-- END: Quest Overrides -->
+   <!-- SMV - Gorgrond - Talador - Spires - Nagrand -->
+
+
+    <QuestOrder IgnoreCheckpoints="true" >
+        <!-- BEGIN: Checkpoint Block
+             This code needs to be replicated after every checkpoint.
+             If you modify something in this block, don't forget to update the copy of this
+             block after each checkpoint, and the at the start of the <QuestOrder>, also.
+        -->
+        <CustomBehavior File="Misc\RunLua" Lua="SetCVar('AutoLootDefault', 1)" />
+        <CustomBehavior File="UserSettings" AutoEquip="true" />
+
+        <CustomBehavior File="EnablePlugin" Names="Anti Drown" />
+        <CustomBehavior File="EnablePlugin" Names="Refreshment Detection" />
+
+        <CustomBehavior File="Misc\ProfileCompatibilityInfo" AllowBrokenAddOns="true" AllowBrokenPlugIns="true" />
+
+        <LootMobs Value="true" />
+        <TargetingDistance Value="20" />    <!-- Use LevelBot default -->
+        <UseMount Value="true" />
+        <!-- END: Checkpoint Block -->
+
+        <CustomBehavior File="Message" Text="Compiling Talador Quests" LogColor="CornflowerBlue" />
+		
+		<!-- Start Talador / Fort Wrynn -->
+			<If Condition="HasQuest(36495) &amp;&amp; IsQuestCompleted(36495)" >
+		<TurnIn QuestName="News from Talador" QuestId="36495" TurnInName="Bodrick Grey" TurnInId="81492" X="1941.726" Y="330.4358" Z="88.96596" />
+			</If>
+		<PickUp QuestName="The Critical Path" QuestId="37183" GiverName="Bodrick Grey" GiverId="81492" X="1941.726" Y="330.4358" Z="88.96596" />
+			<If Condition="HasQuest(37183) &amp;&amp; Me.ZoneId == 7078"> <!-- The Critical Path - WoD SMV -->
+				<CustomBehavior File="InteractWith" MobId="81103" GossipOptions="2" WaitTime="2000" X="1864.33" Y="217.8108" Z="76.63772" />
+			</If>
+		<TurnIn QuestName="The Critical Path" QuestId="37183" TurnInName="Foreman Eksos" TurnInId="79133" X="3601.91" Y="1666.689" Z="176.1843" />
+		<PickUp QuestName="At Your Command" QuestId="34558" GiverName="Foreman Eksos" GiverId="79133" X="3601.91" Y="1666.689" Z="176.1843" />
+			<If Condition="HasQuest(34558) &amp;&amp; !IsQuestCompleted(34558)" > <!-- At Your Command -->
+				<CustomBehavior File="InteractWith" QuestId="34558" MobId="230665" MobType="GameObject" X="3606.819" Y="1671.953" Z="175.2924" />
+				<!-- I chose the Arcane Sanctum, option 2 -->
+				<CustomBehavior File="UserDialog" QuestId="34558" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="2" ExpiryTime="300" 
+											ExpiryAction="InputEnabled_Continue" Text="Choose a Tower or Sanctum" />
+				<CustomBehavior File="Misc\RunLua" QuestId="34558" Lua="QuestChoiceFrameOption2.OptionButton:Click()" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for Cinematic {TimeRemaining}" />
+				<CustomBehavior File="Misc\RunLua" Lua="if MovieFrame:IsVisible() then MovieFrame:StopMovie() else CinematicFrame_CancelCinematic() end" WaitTime="2000" />
+			</If>
+		<TurnIn QuestName="At Your Command" QuestId="34558" TurnInName="Foreman Eksos" TurnInId="79133" X="3601.91" Y="1666.689" Z="176.1843" />
+		<PickUp QuestName="An Audience With The Archmage" QuestId="34631" GiverName="Foreman Eksos" GiverId="79133" X="3601.91" Y="1666.689" Z="176.1843" />
+		<TurnIn QuestName="An Audience With The Archmage" QuestId="34631" TurnInName="Archmage Khadgar" TurnInId="80142" X="3189.076" Y="1362.391" Z="174.0521" />
+		<PickUp QuestName="Making Acquaintances" QuestId="34815" GiverName="Archmage Khadgar" GiverId="80142" X="3189.076" Y="1362.391" Z="174.0521" />
+			<While Condition="HasQuest(34815) &amp;&amp; !IsQuestCompleted(34815)" >
+				<CustomBehavior File="InteractWith" QuestId="34815" MobId="230872" MobType="GameObject" WaitTime="3000" NonCompeteDistance="0" TerminateWhen="IsObjectiveComplete(1, 34815)" X="3390.911" Y="1025.759" Z="179.1573" />
+			</While>
+		<TurnIn QuestName="Making Acquaintances" QuestId="34815" TurnInName="Magister Serena" TurnInId="79392" X="3198.049" Y="767.1545" Z="78.33549" />
+		<PickUp QuestName="Forming the Scroll" QuestId="34612" GiverName="Magister Serena" GiverId="79392" X="3198.049" Y="767.1545" Z="78.33549" />
+		<PickUp QuestName="Gathering the Spark" QuestId="34619" GiverName="Magister Serena" GiverId="79392" X="3198.049" Y="767.1545" Z="78.33549" />
+		<PickUp QuestName="Creating the Ink" QuestId="34609" GiverName="Magister Serena" GiverId="79392" X="3198.049" Y="767.1545" Z="78.33549" />
+
+			
+		
+
+		
+		
+		
+				<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="End of Tested Profile. Development from here" />
+		
+		
+		
+		
+		<!--
+			<Objective QuestName="Forming the Scroll" QuestId="34612" Type="KillMob" MobId="79330" KillCount="3" />
+		<TurnIn QuestName="Forming the Scroll" QuestId="34612" TurnInName="Magister Serena" TurnInId="79392" X="3198.049" Y="767.1545" Z="78.33549" />
+
+			<Objective QuestName="Gathering the Spark" QuestId="34619" Type="KillMob" MobId="79389" KillCount="3" />
+		<TurnIn QuestName="Gathering the Spark" QuestId="34619" TurnInName="Magister Serena" TurnInId="79392" X="3198.049" Y="767.1545" Z="78.33549" />
+
+			<Objective QuestName="Creating the Ink" QuestId="34609" Type="CollectItem" ItemId="111322" CollectCount="30" />
+		<TurnIn QuestName="Creating the Ink" QuestId="34609" TurnInName="Magister Serena" TurnInId="79392" X="3198.049" Y="767.1545" Z="78.33549" />
+
+		
+
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+
+		-->
+
+		<!--
+		
+			<While Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
+			</While>
+			<If Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
+			</If>
+			 <While Condition="!IsObjectiveComplete(1, 00000)"> 
+			 </While>
+				<CustomBehavior File="InteractWith" QuestId="" MobId="" Range="5" 
+				<CustomBehavior File="InteractWith" QuestId="" MobId="" ObjectType="GameObject" WaitTime="2000" Range="3" 
+
+			<If Condition="HasQuest() &amp;&amp; !HasItem()" >
+			</If>
+
+			-->
+
+		
+
+		
+    </QuestOrder>
+
+</HBProfile>
