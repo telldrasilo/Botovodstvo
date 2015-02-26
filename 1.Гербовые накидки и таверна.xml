@@ -224,7 +224,7 @@
 		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />			
 						</if>																	
 
-	                    <!-- Улучшения      
+	                    Улучшения      
 	                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122339" WaitTime="1000"
 	                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
 
@@ -462,7 +462,7 @@
 	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />			
 					</if>																	
 
-                    <!-- Улучшения    
+            Улучшения    
                     <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122339" WaitTime="1000"
                                 CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
 
