@@ -1,0 +1,168 @@
+<HBProfile>
+ <Name>Фарм жаб на вневременном острове и покупка бремени вечности</Name>
+  <MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>true</SellWhite>
+<SellGreen>true</SellGreen>
+<SellBlue>true</SellBlue>
+<SellPurple>true</SellPurple>
+
+<ProtectedItems>
+		<Item Name = "Burden of Eternity" Entry = "103982"/>
+</ProtectedItems>
+
+<Vendors>
+<Vendor Name="Handwerkerin Kwon" Entry="73656" Type="Repair" X="-511.3785" Y="-5008.741" Z="2.056249" />
+</Vendors>
+
+<Mailboxes>
+<Mailbox Entry="73629" X="-516.4636" Y="-4969.116" Z="2.056139" />
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+<QuestOrder>
+	        <If Condition="Me.IsAlliance">
+            <!-- If I am in Dalaran, take the portal to SW -->
+            <If Condition="Me.ZoneId == 4395">
+                <If Condition="Me.IsAlliance">
+                    <CustomBehavior File="Message" Text="We are in Dalaran, using portal to SW"
+                                    LogColor="CornflowerBlue" />
+                    <CustomBehavior File="ForcedDismount" />
+                    <MoveTo X="5718.221" Y="721.2461" Z="641.7213" />
+                    <CustomBehavior File="ForcedDismount" />
+
+                    <CustomBehavior File="InteractWith" MobId="190960" X="5718.221" Y="721.2461" Z="641.7213" />
+                    <CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+                    <If Condition="Me.ZoneId == 1519">
+                        <MoveTo X="-8988.831" Y="860.4624" Z="125.7445" />
+                    </If>
+                </If>
+            </If>
+
+            <!-- If I am in EK, take the SW portal -->
+            <If Condition="( Me.MapId == 0 ) &amp;&amp; ( Me.ZoneId != 5389 ) &amp;&amp; ( Me.ZoneId != 5095 )">
+                <CustomBehavior File="FlyTo" DestName="SW Portal to Jade Forest" X="-8193.133" Y="534.6311"
+                                Z="117.6105" />
+                <CustomBehavior File="ForcedDismount" />
+
+                <CustomBehavior File="InteractWith" MobId="215457" X="-8194.638" Y="529.1678" Z="117.3993" />
+                <CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+            </If>
+            <If Condition="Me.ZoneId == 5785"> <!-- Jade Forest -->
+                <MoveTo X="-310.6441" Y="-1763.056" Z="61.59278" />
+                <CustomBehavior File="InteractWith" MobId="66023" X="-310.6441" Y="-1763.056" Z="61.59278" />
+                <CustomBehavior File="Message"
+                                Text="If you don't have all of the meshes downloaded for Jade Forest and Kun-Lai, it may take a while to download them all."
+                                LogColor="CornflowerBlue" />
+                <MoveTo X="1833.269" Y="1362.562" Z="468.1013" /> <!-- Gate of August Doorway, Kun-Lai side -->
+                <CustomBehavior File="WaitTimer" WaitTime="3000" GoalText="Waiting for flight {TimeRemaining}" />
+            </If>
+        </If>
+
+        <If Condition="Me.IsHorde">
+            <!-- If I am in Dalaran, take the portal to Org -->
+            <If Condition="Me.ZoneId == 4395">
+                <CustomBehavior File="ForcedDismount" />
+                <MoveTo X="5924.277" Y="589.9855" Z="639.8734" />
+                <CustomBehavior File="ForcedDismount" />
+                <CustomBehavior File="InteractWith" MobId="191009" X="5925.295" Y="593.4274" Z="640.5935" />
+                <CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+                <If Condition="Me.ZoneId == 1637">
+                    <MoveTo X="1897.4" Y="-4523.682" Z="27.50176" />
+                </If>
+            </If>
+
+            <!-- If I am in Org, take the Org portal to Jade Forest -->
+            <If Condition="( Me.MapId == 1 ) &amp;&amp; ( Me.ZoneId != 5389 ) &amp;&amp; ( Me.ZoneId != 5095 )">
+                <CustomBehavior File="FlyTo" DestName="Org Portal to Jade Forest" X="2012.154" Y="-4695.624"
+                                Z="28.5676" />
+                <CustomBehavior File="ForcedDismount" />
+
+                <CustomBehavior File="InteractWith" MobId="215424" X="2015.709" Y="-4701.144" Z="28.6388" />
+                <CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+            </If>
+
+            <If Condition="Me.ZoneId == 5785"> <!-- Jade Forest -->
+                <MoveTo X="2924.921" Y="-510.5903" Z="268.8554" />
+                <CustomBehavior File="InteractWith" MobId="66227" Range="4" X="2924.921" Y="-510.5903" Z="268.8554" />
+                <CustomBehavior File="Message"
+                                Text="If you don't have all of the meshes downloaded for Jade Forest and Kun-Lai, it may take a while to download them all."
+                                LogColor="CornflowerBlue" />
+                <MoveTo X="1833.269" Y="1362.562" Z="468.1013" /> <!-- Gate of August Doorway, Kun-Lai side -->
+                <CustomBehavior File="WaitTimer" WaitTime="3000" GoalText="Waiting for flight {TimeRemaining}" />
+            </If>
+        </If>
+    <MoveTo X="-8825.287" Y="596.4655" Z="95.57951" />    
+	<SetGrindArea>
+		<GrindArea>
+			<RandomizeHotspots>true</RandomizeHotspots>
+			<TargetMinLevel>90</TargetMinLevel>
+			<TargetMaxLevel>91</TargetMaxLevel>
+			<MobIDs>72777</MobIDs> <!-- Gulp Frog -->
+			<Blacklist>
+				<Mob Name="Primal Stalker" Entry="72805" Flags="Pull" />
+				<Mob Name="Crag Stalker" Entry="72807" Flags="Pull" />
+				<Mob Name="Eroded Cliffdweller" Entry="72809" Flags="Pull" />
+				<Mob Name="Ancient Spineclaw" Entry="72766" />
+				<Mob Name="Ironfur Great Bull" Entry="72844" />
+				<Mob Name="Eisenfellgrasfresser" Entry="72843" />
+				<Mob Name="Ironfur Grazer" Entry="72842" />
+				<Mob Name="Brilliant Windfeather" Entry="72762" />
+				<Mob Name="Windfeather Nestkeeper" Entry="72761" />
+				<Mob Name="Windfeather Chick" Entry="71143" />
+				<Mob Name="Death Adder" Entry="72841" />
+				<Mob Name="Elder Great Turtle" Entry="72765" />
+				<Mob Name="Great Turtle" Entry="72764" />
+				<Mob Name="Great Turtle Hatchling" Entry="72763" />
+				<Mob Name="Spectral Brewmaster" Entry="73018" />
+				<Mob Name="Spectral Windwalker" Entry="73021" />
+				</Blacklist> 
+
+							
+				<Hotspots>
+				<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
+				<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
+				<Hotspot X="-851.7402" Y="-5685.249" Z="2.501523" />
+				<Hotspot X="-887.4246" Y="-5691.018" Z="2.782298" />
+				<Hotspot X="-916.6104" Y="-5671.801" Z="2.644856" />
+				<Hotspot X="-955.4318" Y="-5644.188" Z="2.125715" />
+				<Hotspot X="-976.1139" Y="-5608.432" Z="4.238826" />
+				<Hotspot X="-1000.876" Y="-5582.854" Z="2.488306" />
+				<Hotspot X="-959.7966" Y="-5556.823" Z="5.001213" />
+				<Hotspot X="-928.7125" Y="-5549.608" Z="2.485685" />
+				<Hotspot X="-924.8749" Y="-5590.662" Z="2.467258" />
+				<Hotspot X="-932.7372" Y="-5617.22" Z="5.418079" />
+				<Hotspot X="-901.3912" Y="-5640.016" Z="3.538862" />
+				<Hotspot X="-851.9879" Y="-5647.238" Z="3.119804" />
+				</Hotspots>
+		</GrindArea>	
+	</SetGrindArea>	
+	<If Condition="(Me.FreeBagSlots &lt; 3)" >
+			<CustomBehavior File="Misc\RunLua" Lua="ShowRecoveryMessage = GetMoney();" />
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;: Moving to Sell and Repair.&quot;);" />
+			<CustomBehavior File="WaitTimer" WaitTime="750" />
+		    <CustomBehavior File="GoTo" X="-511.3785" Y="-5008.741" Z="2.056249"/>
+            <CustomBehavior File="Misc\RunLua" NumOfTimes="15" WaitTime="2000" Lua="
+							if MerchantFrame:IsVisible()==true then
+								if buffer==nil or buffer&gt;4 then buffer=0 end
+								MerchantRepairAllButton:Click()
+								if buffer&lt;5 then
+									for s=1,GetContainerNumSlots(buffer)
+										do local n=GetContainerItemLink(buffer,s)
+											if (n and strfind(n, &quot;ff9d9d9d&quot;) or n and strfind(n, &quot;ffffffff&quot;) or n and strfind(n, &quot;ff1eff00&quot;) or n and strfind(n, &quot;ff0070dd&quot;)) and n and not n:find(&quot;103982&quot;) then
+												UseContainerItem(buffer,s)
+											end
+										end
+									buffer=buffer+1
+									end
+								end" />
+	</If>
+</QuestOrder>
+</HBProfile>

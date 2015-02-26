@@ -1,0 +1,15 @@
+<HBProfile>
+	<Name>[QO] Anti AFK Profile (Turn No Move) [Kick] ($Rev: 2180 $)</Name>
+	
+	<QuestOrder>
+
+		<CustomBehavior File="Message" Text="This is Kickazz006's Anti-AFK Profile.  It simply turns right then left and AFK's for a minute" LogColor="Cornflowerblue" />
+		<While Condition="HasItem(89112)" >
+				<CustomBehavior File="Message" Text="Combinate Mote of Harmony" LogColor="Yellow" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(89112)" CollectCount="10" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" />
+			</While>
+		
+			 
+	</QuestOrder>
+</HBProfile>

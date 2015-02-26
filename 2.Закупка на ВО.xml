@@ -1,0 +1,60 @@
+<HBProfile>
+	<Name>Депозит золота</Name>
+	
+	<QuestOrder>
+		<MoveTo X="-8825.287" Y="596.4655" Z="95.57951" />
+		<If Condition="(Me.Class == WoWClass.Mage) || (Me.Class == WoWClass.Priest) || (Me.Class == WoWClass.Shaman) || (Me.Class == WoWClass.Warlock)" >
+			<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103987" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		
+			<ElseIf Condition="(Me.Class == WoWClass.Paladin) || (Me.Class == WoWClass.Warrior) || (Me.Class == WoWClass.DeathKnight) " >
+				<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103989" WaitTime="1000"
+			                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+			</ElseIf>
+			<Else Condition="(Me.Class == WoWClass.Druid) || (Me.Class == WoWClass.Hunter) || (Me.Class == WoWClass.Rogue) || (Me.Class == WoWClass.Nonk) " >
+				<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103986" WaitTime="1000"
+			                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+			</Else>
+		</If>
+
+		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		<If Condition="Chance(20)">
+			<MoveTo X="-8825.287" Y="596.4655" Z="95.57951" /> 
+			<ElseIf Condition="Chance(20)">
+				<MoveTo X="-8825.287" Y="596.4655" Z="95.57951" /> 
+			</ElseIf>
+			<ElseIf Condition="Chance(20)">
+				<MoveTo X="-8825.287" Y="596.4655" Z="95.57951" /> 
+			</ElseIf>
+			<ElseIf Condition="Chance(20)">
+				<MoveTo X="-8825.287" Y="596.4655" Z="95.57951" /> 
+			</ElseIf>
+			<Else Condition="Chance(20)">
+				<MoveTo X="-8825.287" Y="596.4655" Z="95.57951" /> 
+			</Else>	
+		</If>                                                               
+	</QuestOrder>
+</HBProfile>

@@ -1,0 +1,31 @@
+<HBProfile>
+    <Name>Накидки и таверна</Name>
+    <MinLevel>1</MinLevel>
+    <MaxLevel>1001</MaxLevel>
+
+
+    <QuestOrder>
+    	<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
+    	<If Condition="Me.IsAlliance">
+							<CustomBehavior File="Message" Text="Направляемся в таверну в Штормград" LogColor="Lime" />								
+							<MoveTo X="-8866.083" Y="670.7891" Z="97.90375" />
+							<CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
+							<CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+							<CustomBehavior File="WaitTimer" WaitTime="2000" />
+							<CustomBehavior File="SetHearthstone" MobId="6740"  X="-8867.786" Y="673.6729" Z="97.90324" />
+							<CustomBehavior File="WaitTimer" WaitTime="2000" />
+   		</If>
+
+   		<If Condition="Me.IsHorde">
+			                <CustomBehavior File="Message" Text="Moving to the innkeep at Walley of Honor, Orgrimmar." LogColor="Lime" />
+			                    <RunTo X="1918.18" Y="-4730.643" Z="38.93531" />
+			                <CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
+			                <CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+			                <CustomBehavior File="WaitTimer" WaitTime="2000" />
+			                <CustomBehavior File="SetHearthstone" MobId="46642"  X="1916.46" Y="-4732.79" Z="38.93643"   />
+			                <CustomBehavior File="WaitTimer" WaitTime="5000" />
+   		</If>
+   		<CustomBehavior File="UserDialog" AllowBotStop="true" SoundCue="Exclamation" SoundCueInterval="10"
+                                Text="Пришел на работу!" />		
+    </QuestOrder>
+</HBProfile>

@@ -1,0 +1,495 @@
+<HBProfile>
+    <Name>Накидки и таверна</Name>
+    <MinLevel>1</MinLevel>
+    <MaxLevel>1001</MaxLevel>
+
+
+    <QuestOrder>
+    	<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
+    	<If Condition="Me.IsAlliance">
+            <If Condition="Me.GetReputationLevelWith(72) &lt; Styx.WoWUnitReaction.Exalted &amp;&amp; !HasItem(45574)" >
+                <MoveTo DestName="Captain Lancy Revshon in Stormwind" X="-8841.596" Y="548.8561" Z="96.64429" />
+                <CustomBehavior File="InteractWith" MobId="49877" InteractByBuyingItemId="45574"
+                                X="-8842.06" Y="545.7153" Z="96.91079" />
+            </If>
+
+            <If Condition="HasItem(45574)">
+			 <!-- Элвинский лес -->
+			 			 <If Condition="Chance(16)">
+			  				<CustomBehavior File="Message" Text="Направляемся в таверну в Златоземье в Элвинском Лесу" LogColor="Lime" />					
+							<RunTo X="-9465.371" Y="15.71644" Z="56.96337" />
+							<CustomBehavior File="Message" Text="I have reached the innkeeper." LogColor="Lime" />
+							<CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+							<CustomBehavior File="WaitTimer" WaitTime="1000" />
+							<CustomBehavior File="SetHearthstone" MobId="295"  X="-9462.663" Y="16.19151" Z="56.96373" />
+							<CustomBehavior File="WaitTimer" WaitTime="1000" />
+
+			<!-- Сторожевой холм -->
+						 <ElseIf Condition="Chance(16)">
+							<CustomBehavior File="Message" Text="Направляемся в таверну на Сторожевой Холм в Западном Краю" LogColor="Lime"/>
+							<MoveTo X="-10650.82" Y="1165.563" Z="34.51858" />
+							<CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
+							<CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+							<CustomBehavior File="WaitTimer" WaitTime="2000" />
+							<CustomBehavior File="SetHearthstone" MobId="8931"  X="-10653.28" Y="1166.431" Z="34.50514" />
+							<CustomBehavior File="WaitTimer" WaitTime="2000" />				
+						</ElseIf>
+
+			<!-- Красногорье -->
+						 <ElseIf Condition="Chance(16)">
+							<CustomBehavior File="Message" Text="Направляемся в таверну в Приозерье в Красногорье" LogColor="Lime" />								
+							<MoveTo X="-9226.454" Y="-2155.743" Z="63.73067" />
+							<CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
+							<CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+							<CustomBehavior File="WaitTimer" WaitTime="2000" />
+							<CustomBehavior File="SetHearthstone" MobId="6727"  X="-9226.454" Y="-2155.743" Z="63.73067" />
+							<CustomBehavior File="WaitTimer" WaitTime="2000" />
+						</ElseIf>
+
+			<!-- Штормград -->
+						 <ElseIf Condition="Chance(16)">
+							<CustomBehavior File="Message" Text="Направляемся в таверну в Штормград" LogColor="Lime" />								
+							<MoveTo X="-8866.083" Y="670.7891" Z="97.90375" />
+							<CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
+							<CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+							<CustomBehavior File="WaitTimer" WaitTime="2000" />
+							<CustomBehavior File="SetHearthstone" MobId="6740"  X="-8867.786" Y="673.6729" Z="97.90324" />
+							<CustomBehavior File="WaitTimer" WaitTime="2000" />
+						</ElseIf>
+
+			 <!-- Стальгорн -->
+			 			 <ElseIf Condition="Chance(16)">
+							<CustomBehavior File="Message" Text="Направляемся в таверну в Златоземье в Стальгорн" LogColor="Lime" />								
+							<MoveTo X="-4841.883" Y="-861.3156" Z="501.9148" />
+							<CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
+							<CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+							<CustomBehavior File="WaitTimer" WaitTime="2000" />
+							<CustomBehavior File="SetHearthstone" MobId="5111"  X="-4840.674" Y="-857.094" Z="501.9138" />
+							<CustomBehavior File="WaitTimer" WaitTime="2000" />  
+						</ElseIf>
+
+			<!-- Каранос -->
+						 <Else Condition="Chance(16)">
+							<CustomBehavior File="Message" Text="Направляемся в таверну в Каранос в Дун Морог" LogColor="Lime" />								
+							<MoveTo X="-5597.478" Y="-529.421" Z="399.6526" />
+							<CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
+							<CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+							<CustomBehavior File="WaitTimer" WaitTime="2000" />
+							<CustomBehavior File="SetHearthstone" MobId="1247"  X="-5601.6" Y="-531.203" Z="399.654" />
+							<CustomBehavior File="WaitTimer" WaitTime="2000" />  
+						</Else>
+					</If>	
+   			</If>
+
+   			<!-- Покупаем фамильный шмот 
+
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(83958);" />
+				<CustomBehavior File="WaitTimer" WaitTime="3500" />
+				<CustomBehavior File="InteractWith" MobId="206603" WaitForNpcs="false" ObjectType="GameObject" Range="10" WaitTime="2000" /> 
+				<CustomBehavior File="Misc\RunLua" Lua="
+							if GuildBankFrame:IsVisible()==true then
+								WMoney = 1250000000
+								WithdrawGuildBankMoney(WMoney);
+								print(&quot;|cFF3399FF|r: Помещение &quot;..GetCoinTextureString(MyMoney) в гильдейский банк);
+							else
+							print(&quot;|cFF3399FF[Azyul]|r: Your mobile guild bank wasn't detected, continuing run.&quot;)
+							end" />
+			 	
+			 	<If Condition="Me.Gold &gt; 1200000000">
+                    	<MoveTo X="-4620.533" Y="-1302.769" Z="503.3815" />
+                    	<if Condition="(Me.Class == WoWClass.Warrior) || (Me.Class == WoWClass.DeathKnight)" >
+                    		<CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122263" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122388" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122387" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122264" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122260" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122349" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+						</if>
+						<if Condition="(Me.Class == WoWClass.Paladin)" >
+							<CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122263" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122388" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122387" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122264" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122260" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122389" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122391" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />		                                
+							<CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122338" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />		                                
+						</if>
+
+						<if Condition="(Me.Class == WoWClass.Hunter)" >
+							<CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122246" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122356" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122379" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122252" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122261" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122352" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />			
+						</if>
+
+						<if Condition="(Me.Class == WoWClass.Rogue)" >
+							<CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122248" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122358" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122383" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122254" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122261" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122351" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122351" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122339" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />		                                	
+						</if>
+
+						<if Condition="(Me.Class == WoWClass.Monk)" >
+							<CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122248" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122358" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122383" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122254" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122261" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122363" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />			
+						</if>
+
+						<if Condition="(Me.Class == WoWClass.Priest) || (Me.Class == WoWClass.Mage) || (Me.Class == WoWClass.Warlock)" >
+							<CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122250" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122360" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122384" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122256" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122262" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122353" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />			
+						</if>
+
+						<if Condition="(Me.Class == WoWClass.Shaman)" >
+							<CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122247" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122357" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122380" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122253" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122262" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122353" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />			
+						</if>
+
+						<if Condition="(Me.Class == WoWClass.Druid)" >
+							<CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122249" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122359" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122382" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122255" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122262" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+		                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122353" WaitTime="1000"
+		                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />			
+						</if>																	
+
+	                    <!-- Улучшения      
+	                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122339" WaitTime="1000"
+	                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+
+	                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122338" WaitTime="1000"
+	                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+	                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122338" WaitTime="1000"
+	                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+	                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122338" WaitTime="1000"
+	                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+	                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122338" WaitTime="1000"
+	                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+	                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122338" WaitTime="1000"
+	                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+	                    <CustomBehavior File="InteractWith" MobId="6294" InteractByBuyingItemId="122338" WaitTime="1000"
+	                                CollectionDistance="50" X="-4619.922" Y="-1300.316" Z="503.3816" />
+			 	</If>	
+
+   			<If Condition="HasItem(6948)">
+					<CustomBehavior File="Message" Text="Телепорт домой" LogColor="Fuchsia" />
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
+					<CustomBehavior File="WaitTimer" WaitTime="20000" />		
+			</If>-->
+   		</If>
+
+   		<If Condition="Me.IsHorde">
+            <If Condition="Me.GetReputationLevelWith(76) &lt; Styx.WoWUnitReaction.Exalted &amp;&amp; !HasItem(45581)" >
+                <MoveTo DestName="Stone Guard Nargol in Orgrimmar" X="1807.692" Y="-4377.496" Z="103.1129" />
+                <CustomBehavior File="InteractWith" MobId="50488" InteractByBuyingItemId="45581" WaitTime="3000"
+                                X="1809.561" Y="-4382.668" Z="103.0609" />
+            </If>
+
+            <If Condition="HasItem(45581)">
+            	
+				<!-- Razor Hill -->
+			            <If Condition="Chance(20)">
+			                <CustomBehavior File="Message" Text="Moving to the innkeep at Razor Hill." LogColor="Lime" />                                         
+			                    <RunTo X="338.7665" Y="-4687.898" Z="16.48967" />
+			                <CustomBehavior File="Message" Text="I have reached the innkeeper." LogColor="Lime" />
+			                <CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+			                <CustomBehavior File="WaitTimer" WaitTime="1000" />
+			                <CustomBehavior File="SetHearthstone" MobId="6928"  X="340.3629" Y="-4686.287" Z="16.48929" />
+			                <CustomBehavior File="WaitTimer" WaitTime="1000" />
+			            
+				<!-- Krom' Gar -->
+			            <ElseIf Condition="Chance(20)">
+			                <CustomBehavior File="Message" Text="Moving to the innkeep at Krom' Gar." LogColor="Lime" />                                           
+			                    <RunTo X="879.6248" Y="-17.85691" Z="92.675" />
+			                <CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
+			                <CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+			                <CustomBehavior File="WaitTimer" WaitTime="1000" />
+			                <CustomBehavior File="SetHearthstone" MobId="41892"  X="877.2882" Y="-20.30903" Z="92.67494" />
+			                <CustomBehavior File="WaitTimer" WaitTime="1000" />
+			            </ElseIf>
+				<!-- Mulgore -->
+			            <ElseIf Condition="Chance(20)">
+			                <CustomBehavior File="Message" Text="Moving to the innkeep at Mulgore." LogColor="Lime" />                                                      
+			                    <RunTo X="-2361.553" Y="-348.74" Z="-8.957021" />
+			                <CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
+			                <CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+			                <CustomBehavior File="WaitTimer" WaitTime="1000" />
+			                <CustomBehavior File="SetHearthstone" MobId="6747"  X="-2365.366" Y="-347.3099" Z="-8.95677"  />
+			                <CustomBehavior File="WaitTimer" WaitTime="1000" />
+			            </ElseIf>
+				<!-- Walley of Honor, Orgrimmar -->
+			            <ElseIf Condition="Chance(20)">
+			                <CustomBehavior File="Message" Text="Moving to the innkeep at Walley of Strength, Orgrimmar." LogColor="Lime" />
+			                    <RunTo X="1572.765" Y="-4437.161" Z="16.05518" />
+			                <CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
+			                <CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+			                <CustomBehavior File="WaitTimer" WaitTime="2000" />
+			                <CustomBehavior File="SetHearthstone" MobId="6929"  X="1573.266" Y="-4439.158" Z="16.05683"   />
+			                <CustomBehavior File="WaitTimer" WaitTime="5000" />
+			            </ElseIf>
+				<!-- Walley of Strength, Orgrimmar -->
+			            <Else Condition="Chance(20)">
+			                <CustomBehavior File="Message" Text="Moving to the innkeep at Walley of Honor, Orgrimmar." LogColor="Lime" />
+			                    <RunTo X="1918.18" Y="-4730.643" Z="38.93531" />
+			                <CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
+			                <CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
+			                <CustomBehavior File="WaitTimer" WaitTime="2000" />
+			                <CustomBehavior File="SetHearthstone" MobId="46642"  X="1916.46" Y="-4732.79" Z="38.93643"   />
+			                <CustomBehavior File="WaitTimer" WaitTime="5000" />
+			         </Else>
+				</If>
+   			</If>
+
+<!-- Покупаем фамильный шмот 
+
+			<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(83958);" />
+			<CustomBehavior File="WaitTimer" WaitTime="3500" />
+			<CustomBehavior File="InteractWith" MobId="206603" WaitForNpcs="false" ObjectType="GameObject" Range="10" WaitTime="2000" /> 
+			<CustomBehavior File="Misc\RunLua" Lua="
+						if GuildBankFrame:IsVisible()==true then
+							WMoney = 1250000000
+							WithdrawGuildBankMoney(WMoney);
+							print(&quot;|cFF3399FF|r: Помещение &quot;..GetCoinTextureString(MyMoney) в гильдейский банк);
+						else
+						print(&quot;|cFF3399FF[Azyul]|r: Your mobile guild bank wasn't detected, continuing run.&quot;)
+						end" />
+		 	
+		 	<If Condition="Me.Gold &gt; 1200000000">
+		 		<CustomBehavior File="UseTransport"
+                                TransportId="164871"
+                                WaitAtX="1838.676" WaitAtY="-4387.965" WaitAtZ="135.2332"
+                                TransportStartX="1833.509" TransportStartY="-4391.543" TransportStartZ="152.7679"
+                                TransportEndX="2062.376" TransportEndY="292.998" TransportEndZ="114.973"
+                                StandOnX="1834.961" StandOnY="-4385.694" StandOnZ="135.0334"
+                                GetOffX="2066.773" GetOffY="288.873" GetOffZ="97.03159" />
+                <If Condition="(Me.MapId == 0)">
+                	<MoveTo X="1389.825" Y="125.9258" Z="-62.45245"  />
+                	<if Condition="(Me.Class == WoWClass.Warrior) || (Me.Class == WoWClass.DeathKnight)" >
+                		<CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122263" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122388" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122387" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122264" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122260" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122349" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+					</if>
+					<if Condition="(Me.Class == WoWClass.Paladin)" >
+						<CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122263" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122388" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122387" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122264" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122260" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122389" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122391" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />		                                
+						<CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122338" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />		                                
+					</if>
+
+					<if Condition="(Me.Class == WoWClass.Hunter)" >
+						<CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122246" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122356" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122379" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122252" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122261" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122352" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />			
+					</if>
+
+					<if Condition="(Me.Class == WoWClass.Rogue)" >
+						<CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122248" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122358" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122383" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122254" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122261" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122351" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122351" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122339" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />		                                	
+					</if>
+
+					<if Condition="(Me.Class == WoWClass.Monk)" >
+						<CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122248" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122358" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122383" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122254" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122261" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122363" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />			
+					</if>
+
+					<if Condition="(Me.Class == WoWClass.Priest) || (Me.Class == WoWClass.Mage) || (Me.Class == WoWClass.Warlock)" >
+						<CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122250" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122360" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122384" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122256" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122262" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122353" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />			
+					</if>
+
+					<if Condition="(Me.Class == WoWClass.Shaman)" >
+						<CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122247" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122357" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122380" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122253" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122262" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122353" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />			
+					</if>
+
+					<if Condition="(Me.Class == WoWClass.Druid)" >
+						<CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122249" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122359" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122382" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122255" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122262" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+	                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122353" WaitTime="1000"
+	                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />			
+					</if>																	
+
+                    <!-- Улучшения    
+                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122339" WaitTime="1000"
+                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+
+                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122338" WaitTime="1000"
+                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122338" WaitTime="1000"
+                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122338" WaitTime="1000"
+                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122338" WaitTime="1000"
+                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122338" WaitTime="1000"
+                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+                    <CustomBehavior File="InteractWith" MobId="6566" InteractByBuyingItemId="122338" WaitTime="1000"
+                                CollectionDistance="50" X="1389.634" Y="123.8212" Z="-62.45113" />
+                </If>
+		 	</If>	
+
+   			<If Condition="HasItem(6948)">
+					<CustomBehavior File="Message" Text="Телепорт домой" LogColor="Fuchsia" />
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
+					<CustomBehavior File="WaitTimer" WaitTime="20000" />		
+			</If>
+			-->   
+   		</If>
+   		<CustomBehavior File="UserDialog" AllowBotStop="true" SoundCue="Exclamation" SoundCueInterval="10"
+                                Text="Я почти готов к скачкам по подземельям! Осталось только применить на каждом фамильном предмете Старинную наследную обшивку для брони, а на фамильных оружиях Старинные наследные ножны. Интерфейс с фамильками открывается сочетанием клавиш Shift+P. Вкладка
+                                Фамильные предметы. \n\nЕсли в ГБ были деньги, то я потратил 12 500 золотых :)" />		
+    </QuestOrder>
+</HBProfile>
