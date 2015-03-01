@@ -13,11 +13,11 @@
 <SellPurple>true</SellPurple>
 
 <ProtectedItems>
-		<Item Name = "Burden of Eternity" Entry = "103982"/>
+		<Item Name="Burden of Eternity" Entry="103982"/>
 </ProtectedItems>
 
 <Vendors>
-<Vendor Name="Handwerkerin Kwon" Entry="73656" Type="Repair" X="-511.3785" Y="-5008.741" Z="2.056249" />
+<Vendor Name="Искусный повар Ву" Entry="73657" Type="Food" X="-786.1649" Y="-5086.168" Z="2.065719" />
 </Vendors>
 
 <Mailboxes>
@@ -28,6 +28,7 @@
 </Blackspots>
 
 <QuestOrder>
+	<CustomBehavior File="EnablePlugin" Names="Keep Buffs Active" />
 	        <If Condition="Me.IsAlliance">
             <!-- If I am in Dalaran, take the portal to SW -->
             <If Condition="Me.ZoneId == 4395">
@@ -63,6 +64,7 @@
                                 LogColor="CornflowerBlue" />
                 <MoveTo X="1833.269" Y="1362.562" Z="468.1013" /> <!-- Gate of August Doorway, Kun-Lai side -->
                 <CustomBehavior File="WaitTimer" WaitTime="3000" GoalText="Waiting for flight {TimeRemaining}" />
+                <MoveTo X="-404.95" Y="-4608.56" Z="4.320513" /> 
             </If>
         </If>
 
@@ -90,79 +92,159 @@
             </If>
 
             <If Condition="Me.ZoneId == 5785"> <!-- Jade Forest -->
-                <MoveTo X="2924.921" Y="-510.5903" Z="268.8554" />
-                <CustomBehavior File="InteractWith" MobId="66227" Range="4" X="2924.921" Y="-510.5903" Z="268.8554" />
-                <CustomBehavior File="Message"
-                                Text="If you don't have all of the meshes downloaded for Jade Forest and Kun-Lai, it may take a while to download them all."
-                                LogColor="CornflowerBlue" />
-                <MoveTo X="1833.269" Y="1362.562" Z="468.1013" /> <!-- Gate of August Doorway, Kun-Lai side -->
-                <CustomBehavior File="WaitTimer" WaitTime="3000" GoalText="Waiting for flight {TimeRemaining}" />
+                <MoveTo X="-853.829" Y="-5644.783" Z="2.522595" /> 
             </If>
         </If>
-    <MoveTo X="-8825.287" Y="596.4655" Z="95.57951" />    
-	<SetGrindArea>
-		<GrindArea>
-			<RandomizeHotspots>true</RandomizeHotspots>
-			<TargetMinLevel>90</TargetMinLevel>
-			<TargetMaxLevel>91</TargetMaxLevel>
-			<MobIDs>72777</MobIDs> <!-- Gulp Frog -->
-			<Blacklist>
-				<Mob Name="Primal Stalker" Entry="72805" Flags="Pull" />
-				<Mob Name="Crag Stalker" Entry="72807" Flags="Pull" />
-				<Mob Name="Eroded Cliffdweller" Entry="72809" Flags="Pull" />
-				<Mob Name="Ancient Spineclaw" Entry="72766" />
-				<Mob Name="Ironfur Great Bull" Entry="72844" />
-				<Mob Name="Eisenfellgrasfresser" Entry="72843" />
-				<Mob Name="Ironfur Grazer" Entry="72842" />
-				<Mob Name="Brilliant Windfeather" Entry="72762" />
-				<Mob Name="Windfeather Nestkeeper" Entry="72761" />
-				<Mob Name="Windfeather Chick" Entry="71143" />
-				<Mob Name="Death Adder" Entry="72841" />
-				<Mob Name="Elder Great Turtle" Entry="72765" />
-				<Mob Name="Great Turtle" Entry="72764" />
-				<Mob Name="Great Turtle Hatchling" Entry="72763" />
-				<Mob Name="Spectral Brewmaster" Entry="73018" />
-				<Mob Name="Spectral Windwalker" Entry="73021" />
-				</Blacklist> 
 
-							
-				<Hotspots>
-				<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
-				<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
-				<Hotspot X="-851.7402" Y="-5685.249" Z="2.501523" />
-				<Hotspot X="-887.4246" Y="-5691.018" Z="2.782298" />
-				<Hotspot X="-916.6104" Y="-5671.801" Z="2.644856" />
-				<Hotspot X="-955.4318" Y="-5644.188" Z="2.125715" />
-				<Hotspot X="-976.1139" Y="-5608.432" Z="4.238826" />
-				<Hotspot X="-1000.876" Y="-5582.854" Z="2.488306" />
-				<Hotspot X="-959.7966" Y="-5556.823" Z="5.001213" />
-				<Hotspot X="-928.7125" Y="-5549.608" Z="2.485685" />
-				<Hotspot X="-924.8749" Y="-5590.662" Z="2.467258" />
-				<Hotspot X="-932.7372" Y="-5617.22" Z="5.418079" />
-				<Hotspot X="-901.3912" Y="-5640.016" Z="3.538862" />
-				<Hotspot X="-851.9879" Y="-5647.238" Z="3.119804" />
-				</Hotspots>
-		</GrindArea>	
-	</SetGrindArea>	
-	<If Condition="(Me.FreeBagSlots &lt; 3)" >
-			<CustomBehavior File="Misc\RunLua" Lua="ShowRecoveryMessage = GetMoney();" />
-			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;: Moving to Sell and Repair.&quot;);" />
-			<CustomBehavior File="WaitTimer" WaitTime="750" />
-		    <CustomBehavior File="GoTo" X="-511.3785" Y="-5008.741" Z="2.056249"/>
-            <CustomBehavior File="Misc\RunLua" NumOfTimes="15" WaitTime="2000" Lua="
-							if MerchantFrame:IsVisible()==true then
-								if buffer==nil or buffer&gt;4 then buffer=0 end
-								MerchantRepairAllButton:Click()
-								if buffer&lt;5 then
-									for s=1,GetContainerNumSlots(buffer)
-										do local n=GetContainerItemLink(buffer,s)
-											if (n and strfind(n, &quot;ff9d9d9d&quot;) or n and strfind(n, &quot;ffffffff&quot;) or n and strfind(n, &quot;ff1eff00&quot;) or n and strfind(n, &quot;ff0070dd&quot;)) and n and not n:find(&quot;103982&quot;) then
+<while condition="true">
+       	<While Condition="(Me.FreeBagSlots &gt; 17)" >
+  			<While Condition="(Me.Class == WoWClass.Priest)" > <!-- Priest, Shadow Word: Pain - Needs support for other Disc and Holy -->
+			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="589" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" TerminateWhen="Me.HealthPercent &lt;= 30 || Me.ManaPercent &lt;= .5" >
+				<HuntingGrounds WaypointVisitStrategy="Random" >
+						<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
+						<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
+						<Hotspot X="-851.7402" Y="-5685.249" Z="2.501523" />
+						<Hotspot X="-887.4246" Y="-5691.018" Z="2.782298" />
+						<Hotspot X="-916.6104" Y="-5671.801" Z="2.644856" />
+						<Hotspot X="-955.4318" Y="-5644.188" Z="2.125715" />
+						<Hotspot X="-976.1139" Y="-5608.432" Z="4.238826" />
+						<Hotspot X="-1000.876" Y="-5582.854" Z="2.488306" />
+						<Hotspot X="-959.7966" Y="-5556.823" Z="5.001213" />
+						<Hotspot X="-928.7125" Y="-5549.608" Z="2.485685" />
+						<Hotspot X="-924.8749" Y="-5590.662" Z="2.467258" />
+						<Hotspot X="-932.7372" Y="-5617.22" Z="5.418079" />
+						<Hotspot X="-901.3912" Y="-5640.016" Z="3.538862" />
+						<Hotspot X="-851.9879" Y="-5647.238" Z="3.119804" />
+					</HuntingGrounds>
+				</CustomBehavior>
+			</While>
+
+      <While Condition="(Me.Class == WoWClass.Hunter)" >  <!-- Hunter, Arcane Shot -->
+			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="3044" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" TerminateWhen="Me.HealthPercent &lt;= 30 || Me.MaxFocus &lt;= 14" >
+			<HuntingGrounds WaypointVisitStrategy="Random" >
+					<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
+					<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
+					<Hotspot X="-851.7402" Y="-5685.249" Z="2.501523" />
+					<Hotspot X="-887.4246" Y="-5691.018" Z="2.782298" />
+					<Hotspot X="-916.6104" Y="-5671.801" Z="2.644856" />
+					<Hotspot X="-955.4318" Y="-5644.188" Z="2.125715" />
+					<Hotspot X="-976.1139" Y="-5608.432" Z="4.238826" />
+					<Hotspot X="-1000.876" Y="-5582.854" Z="2.488306" />
+					<Hotspot X="-959.7966" Y="-5556.823" Z="5.001213" />
+					<Hotspot X="-928.7125" Y="-5549.608" Z="2.485685" />
+					<Hotspot X="-924.8749" Y="-5590.662" Z="2.467258" />
+					<Hotspot X="-932.7372" Y="-5617.22" Z="5.418079" />
+					<Hotspot X="-901.3912" Y="-5640.016" Z="3.538862" />
+					<Hotspot X="-851.9879" Y="-5647.238" Z="3.119804" />
+				</HuntingGrounds>
+			</CustomBehavior>
+		</While>
+
+		<While Condition="(Me.Class == WoWClass.DeathKnight)" >  <!-- Death Knight, Icy Touch - needs to be improved with more spells -->
+			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="45477" WaitForNpcs="False" Range="29" PreInteractMountStrategy="Dismount" NumOfTimes="1" TerminateWhen="Me.HealthPercent &lt;= 30 || Me.FrostRuneCount == 0" >
+				<HuntingGrounds WaypointVisitStrategy="Random" >
+					<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
+					<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
+					<Hotspot X="-851.7402" Y="-5685.249" Z="2.501523" />
+					<Hotspot X="-887.4246" Y="-5691.018" Z="2.782298" />
+					<Hotspot X="-916.6104" Y="-5671.801" Z="2.644856" />
+					<Hotspot X="-955.4318" Y="-5644.188" Z="2.125715" />
+					<Hotspot X="-976.1139" Y="-5608.432" Z="4.238826" />
+					<Hotspot X="-1000.876" Y="-5582.854" Z="2.488306" />
+					<Hotspot X="-959.7966" Y="-5556.823" Z="5.001213" />
+					<Hotspot X="-928.7125" Y="-5549.608" Z="2.485685" />
+					<Hotspot X="-924.8749" Y="-5590.662" Z="2.467258" />
+					<Hotspot X="-932.7372" Y="-5617.22" Z="5.418079" />
+					<Hotspot X="-901.3912" Y="-5640.016" Z="3.538862" />
+					<Hotspot X="-851.9879" Y="-5647.238" Z="3.119804" />
+				</HuntingGrounds>
+			</CustomBehavior>
+		</While>
+		<While Condition="(Me.Class == WoWClass.Warrior)" > <!-- Warrior, Melee Attack... thanks Blizzard for removing any efficient Ranged for Warriors. -->
+			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777"  WaitForNpcs="False" Range="29" PreInteractMountStrategy="Dismount" NumOfTimes="1" TerminateWhen="Me.HealthPercent &lt;= 30" >
+				<HuntingGrounds WaypointVisitStrategy="Random" >
+					<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
+					<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
+					<Hotspot X="-851.7402" Y="-5685.249" Z="2.501523" />
+					<Hotspot X="-887.4246" Y="-5691.018" Z="2.782298" />
+					<Hotspot X="-916.6104" Y="-5671.801" Z="2.644856" />
+					<Hotspot X="-955.4318" Y="-5644.188" Z="2.125715" />
+					<Hotspot X="-976.1139" Y="-5608.432" Z="4.238826" />
+					<Hotspot X="-1000.876" Y="-5582.854" Z="2.488306" />
+					<Hotspot X="-959.7966" Y="-5556.823" Z="5.001213" />
+					<Hotspot X="-928.7125" Y="-5549.608" Z="2.485685" />
+					<Hotspot X="-924.8749" Y="-5590.662" Z="2.467258" />
+					<Hotspot X="-932.7372" Y="-5617.22" Z="5.418079" />
+					<Hotspot X="-901.3912" Y="-5640.016" Z="3.538862" />
+					<Hotspot X="-851.9879" Y="-5647.238" Z="3.119804" />
+				</HuntingGrounds>
+			</CustomBehavior>
+		</While>
+		<While Condition="(Me.Class == WoWClass.Paladin)" >  <!-- Paladin, Judgment.  Holy needs spell. -->
+			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="20271" WaitForNpcs="False" Range="29" PreInteractMountStrategy="Dismount" NumOfTimes="1" TerminateWhen="Me.HealthPercent &lt;= 30 || Me.ManaPercent &lt;= .5" >
+				<HuntingGrounds WaypointVisitStrategy="Random" >
+					<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
+					<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
+					<Hotspot X="-851.7402" Y="-5685.249" Z="2.501523" />
+					<Hotspot X="-887.4246" Y="-5691.018" Z="2.782298" />
+					<Hotspot X="-916.6104" Y="-5671.801" Z="2.644856" />
+					<Hotspot X="-955.4318" Y="-5644.188" Z="2.125715" />
+					<Hotspot X="-976.1139" Y="-5608.432" Z="4.238826" />
+					<Hotspot X="-1000.876" Y="-5582.854" Z="2.488306" />
+					<Hotspot X="-959.7966" Y="-5556.823" Z="5.001213" />
+					<Hotspot X="-928.7125" Y="-5549.608" Z="2.485685" />
+					<Hotspot X="-924.8749" Y="-5590.662" Z="2.467258" />
+					<Hotspot X="-932.7372" Y="-5617.22" Z="5.418079" />
+					<Hotspot X="-901.3912" Y="-5640.016" Z="3.538862" />
+					<Hotspot X="-851.9879" Y="-5647.238" Z="3.119804" />
+				</HuntingGrounds>
+			</CustomBehavior>
+		</While>
+		<While Condition="(Me.Class == WoWClass.Monk)" >  <!-- Monk, Storm Earth and Fire -->
+			<DisableBehavior Name="Combat" />
+			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="137639" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" TerminateWhen="Me.HealthPercent &lt;= 30 || Me.ManaPercent &lt;= .5 || Me.MaxEnergy &lt;= 9" >
+				<HuntingGrounds WaypointVisitStrategy="Random" >
+					<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
+					<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
+					<Hotspot X="-851.7402" Y="-5685.249" Z="2.501523" />
+					<Hotspot X="-887.4246" Y="-5691.018" Z="2.782298" />
+					<Hotspot X="-916.6104" Y="-5671.801" Z="2.644856" />
+					<Hotspot X="-955.4318" Y="-5644.188" Z="2.125715" />
+					<Hotspot X="-976.1139" Y="-5608.432" Z="4.238826" />
+					<Hotspot X="-1000.876" Y="-5582.854" Z="2.488306" />
+					<Hotspot X="-959.7966" Y="-5556.823" Z="5.001213" />
+					<Hotspot X="-928.7125" Y="-5549.608" Z="2.485685" />
+					<Hotspot X="-924.8749" Y="-5590.662" Z="2.467258" />
+					<Hotspot X="-932.7372" Y="-5617.22" Z="5.418079" />
+					<Hotspot X="-901.3912" Y="-5640.016" Z="3.538862" />
+					<Hotspot X="-851.9879" Y="-5647.238" Z="3.119804" />
+				</HuntingGrounds>
+			</CustomBehavior>
+			<CustomBehavior File="RunMacro" Macro="/cancelaura Storm, Earth and Fire" />
+			<EnableBehavior Name="Combat" />
+		</While>									
+	</While>
+
+	<If Condition="(Me.FreeBagSlots &lt; 17)" >
+		<CustomBehavior File="Message" Text="Надо продать шмот" LogColor="Fuchsia" />
+		<MoveTo X="-511.3785" Y="-5008.741" Z="2.056249" />
+		<CustomBehavior File="DeleteItems" Ids="104267" />
+		<CustomBehavior File="InteractWith" MobId="73656" />
+					        	<CustomBehavior File="Misc\RunLua" NumOfTimes="15" WaitTime="1000" Lua="
+								if MerchantFrame:IsVisible()==true then
+									if buffer==nil or buffer&gt;4 then buffer=0 end
+									MerchantRepairAllButton:Click()
+									if buffer&lt;5 then
+										for s=1,GetContainerNumSlots(buffer)
+											do local n=GetContainerItemLink(buffer,s)
+											if (n and strfind(n, &quot;ffffffff&quot;) or n and strfind(n, &quot;ffa335ee&quot;) or n and strfind(n, &quot;ffffffff&quot;) or n and strfind(n, &quot;ff1eff00&quot;) or n and strfind(n, &quot;ff0070dd&quot;)) and n and not n:find(&quot;103982&quot;) and n and not n:find(&quot;82451&quot;)  and n and not n:find(&quot;81916&quot;) and n and not n:find(&quot;81920&quot;) then
 												UseContainerItem(buffer,s)
 											end
 										end
 									buffer=buffer+1
 									end
-								end" />
+								end" />						
 	</If>
+</while>
 </QuestOrder>
 </HBProfile>
