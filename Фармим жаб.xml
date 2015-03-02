@@ -16,10 +16,6 @@
 		<Item Name="Burden of Eternity" Entry="103982"/>
 </ProtectedItems>
 
-<Vendors>
-<Vendor Name="Искусный повар Ву" Entry="73657" Type="Food" X="-786.1649" Y="-5086.168" Z="2.065719" />
-</Vendors>
-
 <Mailboxes>
 <Mailbox Entry="73629" X="-516.4636" Y="-4969.116" Z="2.056139" />
 </Mailboxes>
@@ -29,6 +25,7 @@
 
 <QuestOrder>
 	<CustomBehavior File="EnablePlugin" Names="Keep Buffs Active" />
+    <CustomBehavior File="EnablePlugin" Names="LogMeOut!" />	
 	        <If Condition="Me.IsAlliance">
             <!-- If I am in Dalaran, take the portal to SW -->
             <If Condition="Me.ZoneId == 4395">
@@ -92,14 +89,26 @@
             </If>
 
             <If Condition="Me.ZoneId == 5785"> <!-- Jade Forest -->
-                <MoveTo X="-853.829" Y="-5644.783" Z="2.522595" /> 
+                <MoveTo X="-781.9042" Y="-5083.998" Z="2.056588" />
+                <CustomBehavior File="InteractWith" MobId="73657" InteractByBuyingItemId="81406" WaitTime="1000"
+			                                CollectionDistance="50" X="-786.1649" Y="-5086.168" Z="2.065683" />
+                <CustomBehavior File="InteractWith" MobId="73657" InteractByBuyingItemId="81406" WaitTime="1000"
+			                                CollectionDistance="50" X="-786.1649" Y="-5086.168" Z="2.065683" />
+                <CustomBehavior File="InteractWith" MobId="73657" InteractByBuyingItemId="81406" WaitTime="1000"
+			                                CollectionDistance="50" X="-786.1649" Y="-5086.168" Z="2.065683" />
+                <CustomBehavior File="InteractWith" MobId="73657" InteractByBuyingItemId="81406" WaitTime="1000"
+			                                CollectionDistance="50" X="-786.1649" Y="-5086.168" Z="2.065683" />
+                <CustomBehavior File="InteractWith" MobId="73657" InteractByBuyingItemId="81406" WaitTime="1000"
+			                                CollectionDistance="50" X="-786.1649" Y="-5086.168" Z="2.065683" />
+                <CustomBehavior File="InteractWith" MobId="73657" InteractByBuyingItemId="81406" WaitTime="1000"
+			                                CollectionDistance="50" X="-786.1649" Y="-5086.168" Z="2.065683" />			                                			                                			                                			                                			                                
             </If>
         </If>
 
 <while condition="true">
        	<While Condition="(Me.FreeBagSlots &gt; 17)" >
   			<While Condition="(Me.Class == WoWClass.Priest)" > <!-- Priest, Shadow Word: Pain - Needs support for other Disc and Holy -->
-			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="589" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" TerminateWhen="Me.HealthPercent &lt;= 30 || Me.ManaPercent &lt;= .5" >
+			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="589" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" >
 				<HuntingGrounds WaypointVisitStrategy="Random" >
 						<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
 						<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
@@ -120,7 +129,7 @@
 			</While>
 
       <While Condition="(Me.Class == WoWClass.Hunter)" >  <!-- Hunter, Arcane Shot -->
-			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="3044" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" TerminateWhen="Me.HealthPercent &lt;= 30 || Me.MaxFocus &lt;= 14" >
+			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="3044" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" >
 			<HuntingGrounds WaypointVisitStrategy="Random" >
 					<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
 					<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
@@ -141,7 +150,7 @@
 		</While>
 
 		<While Condition="(Me.Class == WoWClass.DeathKnight)" >  <!-- Death Knight, Icy Touch - needs to be improved with more spells -->
-			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="45477" WaitForNpcs="False" Range="29" PreInteractMountStrategy="Dismount" NumOfTimes="1" TerminateWhen="Me.HealthPercent &lt;= 30 || Me.FrostRuneCount == 0" >
+			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="45477" WaitForNpcs="False" Range="29" PreInteractMountStrategy="Dismount" NumOfTimes="1" >
 				<HuntingGrounds WaypointVisitStrategy="Random" >
 					<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
 					<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
@@ -161,7 +170,7 @@
 			</CustomBehavior>
 		</While>
 		<While Condition="(Me.Class == WoWClass.Warrior)" > <!-- Warrior, Melee Attack... thanks Blizzard for removing any efficient Ranged for Warriors. -->
-			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777"  WaitForNpcs="False" Range="29" PreInteractMountStrategy="Dismount" NumOfTimes="1" TerminateWhen="Me.HealthPercent &lt;= 30" >
+			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777"  WaitForNpcs="False" Range="29" PreInteractMountStrategy="Dismount" NumOfTimes="1"  >
 				<HuntingGrounds WaypointVisitStrategy="Random" >
 					<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
 					<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
@@ -181,7 +190,7 @@
 			</CustomBehavior>
 		</While>
 		<While Condition="(Me.Class == WoWClass.Paladin)" >  <!-- Paladin, Judgment.  Holy needs spell. -->
-			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="20271" WaitForNpcs="False" Range="29" PreInteractMountStrategy="Dismount" NumOfTimes="1" TerminateWhen="Me.HealthPercent &lt;= 30 || Me.ManaPercent &lt;= .5" >
+			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="20271" WaitForNpcs="False" Range="29" PreInteractMountStrategy="Dismount" NumOfTimes="1" >
 				<HuntingGrounds WaypointVisitStrategy="Random" >
 					<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
 					<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
@@ -202,7 +211,7 @@
 		</While>
 		<While Condition="(Me.Class == WoWClass.Monk)" >  <!-- Monk, Storm Earth and Fire -->
 			<DisableBehavior Name="Combat" />
-			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="137639" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" TerminateWhen="Me.HealthPercent &lt;= 30 || Me.ManaPercent &lt;= .5 || Me.MaxEnergy &lt;= 9" >
+			<CustomBehavior File="InteractWith" IgnoreCombat="True" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="137639" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" >
 				<HuntingGrounds WaypointVisitStrategy="Random" >
 					<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
 					<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
@@ -243,7 +252,20 @@
 										end
 									buffer=buffer+1
 									end
-								end" />						
+								end" />
+        <MoveTo X="-781.9042" Y="-5083.998" Z="2.056588" />
+        <CustomBehavior File="InteractWith" MobId="73657" InteractByBuyingItemId="81406" WaitTime="1000"
+	                                CollectionDistance="50" X="-786.1649" Y="-5086.168" Z="2.065683" />
+        <CustomBehavior File="InteractWith" MobId="73657" InteractByBuyingItemId="81406" WaitTime="1000"
+	                                CollectionDistance="50" X="-786.1649" Y="-5086.168" Z="2.065683" />
+        <CustomBehavior File="InteractWith" MobId="73657" InteractByBuyingItemId="81406" WaitTime="1000"
+	                                CollectionDistance="50" X="-786.1649" Y="-5086.168" Z="2.065683" />
+        <CustomBehavior File="InteractWith" MobId="73657" InteractByBuyingItemId="81406" WaitTime="1000"
+	                                CollectionDistance="50" X="-786.1649" Y="-5086.168" Z="2.065683" />
+        <CustomBehavior File="InteractWith" MobId="73657" InteractByBuyingItemId="81406" WaitTime="1000"
+	                                CollectionDistance="50" X="-786.1649" Y="-5086.168" Z="2.065683" />
+        <CustomBehavior File="InteractWith" MobId="73657" InteractByBuyingItemId="81406" WaitTime="1000"
+	                                CollectionDistance="50" X="-786.1649" Y="-5086.168" Z="2.065683" />															
 	</If>
 </while>
 </QuestOrder>

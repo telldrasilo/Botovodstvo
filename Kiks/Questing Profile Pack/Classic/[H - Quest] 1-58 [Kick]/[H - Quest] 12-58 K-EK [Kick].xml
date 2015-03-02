@@ -3199,6 +3199,16 @@
 		<LootMobs Value="true" />
 		<UseMount Value="true" />
 		<CustomBehavior File="Hooks\MountHook" state="true" />
+
+		<CustomBehavior File="Hooks\DoWhen" ActivityName="Oozing Bag" UseWhen="HasItem(20768)" >
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:20768&quot;)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1000" GoalText="Waiting for Oozing Bag loot {TimeRemaining}" />
+		</CustomBehavior>
+
+		<CustomBehavior File="Hooks\DoWhen" ActivityName="Scum Covered Bag" UseWhen="HasItem(20767)" >
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:20767&quot;)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1000" GoalText="Waiting for Scum Covered Bag loot {TimeRemaining}" />
+		</CustomBehavior>
 		<!-- CHECKPOINT BLOCK END -->
 
 		<ClearVendor />
@@ -4089,7 +4099,7 @@
 			<TurnIn QuestName="Mission Improbable" QuestId="13808" TurnInName="Krokk" TurnInId="33889" X="2611.031" Y="-3058.034" Z="156.4043" />
 			<PickUp QuestName="Making Stumps" QuestId="13815" GiverName="Krokk" GiverId="33889" X="2611.031" Y="-3058.034" Z="156.4043" />
 			<PickUp QuestName="Wet Work" QuestId="13865" GiverName="Krokk" GiverId="33889" X="2611.031" Y="-3058.034" Z="156.4043" />
-			<If Condition="HasQuest(13815) &amp;&amp; !IsQuestCompleted(13815)">
+			<While Condition="HasQuest(13815) &amp;&amp; !IsQuestCompleted(13815)">
 				<CustomBehavior File="InteractWith" QuestId="13815" InteractByUsingItemId="45807" MobId="34167" NumOfTimes="20" WaitTime="4000" MobState="Alive" >
 					<HuntingGrounds>
 						<Hotspot  X="2460.057" Y="-3266.886" Z="114.6126" />
@@ -4098,7 +4108,7 @@
 						<Hotspot X="2629.573" Y="-3371.828" Z="122.2248" />
 					</HuntingGrounds>
 				</CustomBehavior>
-			</If>
+			</While>
 			<Objective QuestName="Wet Work" QuestId="13865" Type="KillMob" MobId="34208" KillCount="1" />
 			<Objective QuestName="Wet Work" QuestId="13865" Type="KillMob" MobId="34294" KillCount="1" />
 			<Objective QuestName="Wet Work" QuestId="13865" Type="KillMob" MobId="34204" KillCount="1" />
@@ -4110,7 +4120,17 @@
 				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:45710&quot;)" />
 				<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for npc to spawn {TimeRemaining}" />
 			</While>
-			<TurnIn QuestName="Wet Work" QuestId="13865" TurnInName="Krokk" TurnInId="33889" X="2611.031" Y="-3058.034" Z="156.4043" />
+
+			<While Condition="HasQuest(13865) &amp;&amp; IsQuestCompleted(13865) &amp;&amp; ( Unit(33889) == null )">
+				<MoveTo X="2611.031" Y="-3058.034" Z="156.4043" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:45710&quot;)" />
+				<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for npc to spawn {TimeRemaining}" />
+				<TurnIn QuestName="Wet Work" QuestId="13865" TurnInName="Krokk" TurnInId="33889" X="2611.031" Y="-3058.034" Z="156.4043" />
+			</While>
+			<If Condition="HasQuest(13865)" >
+				<TurnIn QuestName="Wet Work" QuestId="13865" TurnInName="Krokk" TurnInId="33889" X="2611.031" Y="-3058.034" Z="156.4043" />
+			</If>
 			<TurnIn QuestName="Making Stumps" QuestId="13815" TurnInName="Krokk" TurnInId="33889" X="2611.031" Y="-3058.034" Z="156.4043" />
 			<PickUp QuestName="As Good as it Gets" QuestId="13870" GiverName="Krokk" GiverId="33889" X="2611.031" Y="-3058.034" Z="156.4043" />
 			<TurnIn QuestName="As Good as it Gets" QuestId="13870" TurnInName="Overseer Gorthak" TurnInId="17304" />
@@ -6334,8 +6354,10 @@
 			<CustomBehavior File="WaitTimer" WaitTime="20000" GoalText="Waiting for Taerar {TimeRemaining}" />
 			<CustomBehavior File="InteractWith" QuestId="25379" MobId="39853" PreInteractMountStrategy="DismountOrCancelShapeshift" WaitForNpcs="False" X="-4337.523" Y="-211.8387" Z="125.1737" />
 			<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for kill {TimeRemaining}" />
-			<AbandonQuest QuestId="25379" Type="Failed" />
-			<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for cache {TimeRemaining}" />
+			<If Condition="!IsQuestCompleted(25379)">
+				<AbandonQuest QuestId="25379" Type="Failed" />
+				<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for cache {TimeRemaining}" />
+			</If>
 		</While>
 
 		<TurnIn QuestName="Taerar's Fall" QuestId="25379" TurnInName="Ysondre" TurnInId="39407" />
@@ -6404,7 +6426,7 @@
 		<PickUp QuestName="Seaside Salvage" QuestId="24906" GiverName="Megs Dreadshredder" GiverId="38534" X="-7211.632" Y="-3757.743" Z="9.190064" />
 		<CustomBehavior File="Message" Text="Compiling Gadgetzan Quests" LogColor="Green" />
 		<PickUp QuestName="Puddle Stomping" QuestId="24907" GiverName="Megs Dreadshredder" GiverId="38534" />
-		<PickUp QuestName="Butcherbot" QuestId="25112" GiverName="Driz Plunkbow" GiverId="39178" />
+		<PickUp QuestName="Butcherbot" QuestId="25112" GiverName="Driz Plunkbow" GiverId="39178" X="-7120.835" Y="-3831.493" Z="9.009451" />
 
 		<!-- Get flight path from Bulkrek Ragefist -->
 		<CustomBehavior File="InteractWith" QuestId="25112" Range="5" MobId="7824" X="-7098.417" Y="-3816.016" Z="9.489635" />
@@ -8711,6 +8733,63 @@
 		<TurnIn QuestName="How to Make Meat Fresh Again" QuestId="24697" TurnInName="Nolen Tacker" TurnInId="38270" />
 
 		<PickUp QuestName="Crystals of Power" QuestId="24720" GiverName="J.D. Collie" GiverId="9117" />
+
+		<CustomBehavior File="InteractWith" QuestId="24720" Name="Red Power Crystal" MobIds="164660, 164780" NumOfTimes="20" TerminateWhen="IsObjectiveComplete(1, 24720)" >
+			<HuntingGrounds>
+				<Hotspot X="-7477.984" Y="-1191.443" Z="-265.308" />
+				<Hotspot X="-7608.344" Y="-1150.354" Z="-272.2216" />
+				<Hotspot X="-7862.379" Y="-714.9725" Z="-260.5129" />
+				<Hotspot X="-7920.815" Y="-556.8744" Z="-255.2431" />
+				<Hotspot X="-7859.957" Y="-558.319" Z="-256.1201" />
+				<Hotspot X="-7696.596" Y="-586.7908" Z="-270.6611" />
+				<Hotspot X="-7694.299" Y="-479.2576" Z="-264.029" />
+				<Hotspot X="-7455.254" Y="-491.2262" Z="-271.8472" />
+				<Hotspot X="-7446.912" Y="-422.1315" Z="-272.2218" />
+				<Hotspot X="-7450.186" Y="-379.0977" Z="-257.8883" />
+			</HuntingGrounds>
+		</CustomBehavior>
+
+		<CustomBehavior File="InteractWith" QuestId="24720" Name="Yellow Power Crystal" MobIds="164661, 164781" NumOfTimes="20" TerminateWhen="IsObjectiveComplete(2, 24720)" >
+			<HuntingGrounds>
+				<Hotspot X="-6485.755" Y="-582.3945" Z="-269.151" />
+				<Hotspot X="-6463.928" Y="-857.1389" Z="-272.2362" />
+				<Hotspot X="-6334.444" Y="-915.1207" Z="-242.8548" />
+				<Hotspot X="-6374.209" Y="-1088.804" Z="-272.0599" />
+				<Hotspot X="-6330.403" Y="-1195.67" Z="-271.532" />
+				<Hotspot X="-6286.212" Y="-1219.01" Z="-266.8279" />
+				<Hotspot X="-6513.635" Y="-1093.035" Z="-270.7225" />
+				<Hotspot X="-6629.21" Y="-930.0539" Z="-272.7163" />
+				<Hotspot X="-6694.374" Y="-684.7958" Z="-272.0091" />
+			</HuntingGrounds>
+		</CustomBehavior>
+
+		<CustomBehavior File="InteractWith" QuestId="24720" Name="Green Power Crystal" MobIds="164659, 164779" NumOfTimes="20" TerminateWhen="IsObjectiveComplete(3, 24720)" >
+			<HuntingGrounds>
+				<Hotspot X="-6298.79" Y="-1375.444" Z="-267.1346" />
+				<Hotspot X="-6345.571" Y="-1613.487" Z="-269.9628" />
+				<Hotspot X="-6404.603" Y="-1798.222" Z="-269.7442" />
+				<Hotspot X="-6487.263" Y="-1904.667" Z="-271.0442" />
+				<Hotspot X="-6588.989" Y="-1994.976" Z="-270.515" />
+				<Hotspot X="-6437.817" Y="-2061.642" Z="-248.5014" />
+				<Hotspot X="-6783.819" Y="-2135.262" Z="-265.2006" />
+				<Hotspot X="-6847.025" Y="-2149.052" Z="-267.7995" />
+				<Hotspot X="-6896.665" Y="-2241.441" Z="-269.5391" />
+				<Hotspot X="-6963.002" Y="-2272.133" Z="-269.6707" />
+			</HuntingGrounds>
+		</CustomBehavior>
+
+		<CustomBehavior File="InteractWith" QuestId="24720" Name="Blue Power Crystal" MobIds="164658, 164778" NumOfTimes="20" TerminateWhen="IsObjectiveComplete(4, 24720)" >
+			<HuntingGrounds>
+				<Hotspot X="-7360.485" Y="-2231.522" Z="-271.3014" />
+				<Hotspot X="-7481.603" Y="-2244.66" Z="-271.7255" />
+				<Hotspot X="-7703.63" Y="-2234.052" Z="-255.6305" />
+				<Hotspot X="-7788.346" Y="-2102.16" Z="-268.2585" />
+				<Hotspot X="-8010.332" Y="-1735.027" Z="-272.79" />
+				<Hotspot X="-7891.062" Y="-1626.441" Z="-269.1235" />
+				<Hotspot X="-8010.715" Y="-1587.874" Z="-270.5659" />
+			</HuntingGrounds>
+		</CustomBehavior>
+
 		<Objective QuestName="Crystals of Power" QuestId="24720" Type="CollectItem" ItemId="11186" CollectCount="7" />
 		<Objective QuestName="Crystals of Power" QuestId="24720" Type="CollectItem" ItemId="11188" CollectCount="7" />
 		<Objective QuestName="Crystals of Power" QuestId="24720" Type="CollectItem" ItemId="11185" CollectCount="7" />
@@ -8906,8 +8985,9 @@
 			</CustomBehavior>
 
 			<While Condition="HasQuest(24706) &amp;&amp; !IsQuestCompleted(24706)">
+				<DisableBehavior Name="Pull, Combat" />
 				<MoveTo DestName="The Spirits of Golakka Hot Springs" QuestId="24706" X="-7228.146" Y="-599.6198" Z="-271.2461" />
-				<DisableBehavior Name="Pull" />
+
 				<While Condition="HasQuest(24706) &amp;&amp; !IsQuestCompleted(24706)">
 					<CustomBehavior QuestId="24706" File="TargetAndMoveToMob" MobId="38254" TargetOnlyIfHealthPercentAbove="1" MoveWithinMaxRangeOfMob="2" WaitForNpcs="False" WaitTime="25000" >
 						<HuntingGrounds>
@@ -8932,7 +9012,7 @@
 		<If Condition="HasQuest(24706) &amp;&amp; IsQuestCompleted(24706)">
 			<CustomBehavior File="Hooks\DoWhen" ActivityName="GetMaxFollower" Command="Remove" />
 			<TurnIn QuestId="24706" />
-			<EnableBehavior Name="Pull" />
+			<EnableBehavior Name="Pull, Combat" />
 		</If>
 
 		<PickUp QuestName="The Ballad of Maximillian" QuestId="24707" GiverName="Maximillian of Northshire" GiverId="38237" X="-7228.146" Y="-599.6198" Z="-271.2461" />
@@ -9160,13 +9240,8 @@
 		<TurnIn QuestName="Twilight Geolords" QuestId="8320" TurnInName="Huum Wildmane" TurnInId="15270" />
 		<PickUp QuestName="Vyral the Vile" QuestId="8321" GiverName="Huum Wildmane" GiverId="15270" />
 
-		<While Condition="HasQuest(8321) &amp;&amp; !IsQuestCompleted(8321)">
-			<MoveTo QuestId="8321" DestName="Vyral the Vile" X="-6325.47" Y="7.681579" Z="6.509269" />
-			<CustomBehavior File="WaitTimer" WaitTime="120000" GoalText="Waiting for Vyral the Vile {TimeRemaining}" />
-			<CustomBehavior File="InteractWith" QuestId="8321" MobId="15202" X="-6325.47" Y="7.681579" Z="6.509269" />
-		</While>
-
-		<Objective QuestName="Vyral the Vile" QuestId="8321" Type="CollectItem" ItemId="20466" CollectCount="1" />
+		<LootMobs Value="true" />
+		<CustomBehavior File="KillUntilComplete" QuestId="8321" MobId="15202" X="-6325.47" Y="7.681579" Z="6.509269" />		
 		<TurnIn QuestName="Vyral the Vile" QuestId="8321" TurnInName="Huum Wildmane" TurnInId="15270" />
 		<PickUp QuestName="The Twilight Mystery" QuestId="8284" GiverName="Geologist Larksbane" GiverId="15183" />
 		<PickUp QuestName="Dearest Natalia" QuestId="8304" GiverName="Commander Mar'alith" GiverId="15181" X="-6752.384" Y="823.8355" Z="57.36497" />
@@ -9373,7 +9448,7 @@
 			<TurnIn QuestName="The Deserter" QuestId="8285" TurnInName="Hermit Ortell" TurnInId="15194" />
 		</If>
 
-		<If Condition="( Me.Level &lt; 56 ) &amp;&amp; ( Me.MapId == 0 )">
+		<If Condition="( Me.Level &lt; 58 ) &amp;&amp; ( Me.MapId == 0 )">
 			<SetGrindArea>
 				<GrindArea>
 					<Name>Grind to Level 58</Name>
@@ -9388,7 +9463,7 @@
 					</Hotspots>
 				</GrindArea>
 			</SetGrindArea>
-			<GrindUntil Level="56" />
+			<GrindUntil Level="58" />
 
 		</If>
 		<If Condition="( Me.Level &lt; 58 ) &amp;&amp; ( Me.MapId == 0 )">
@@ -9484,7 +9559,9 @@
 				<TurnIn QuestName="Call of the Warmatron" QuestId="28865" TurnInName="Okrilla" TurnInId="41124" />
 			</If>
 		</If>
-		<CustomBehavior File="LoadProfile" ProfileName="..\..\BC\[Fly][H - Quest] BC 58-70 [Kick]" RememberProfile="true" />
+		<If Condition="Me.Level &gt;= 58">
+			<CustomBehavior File="LoadProfile" ProfileName="..\..\BC\[Fly][H - Quest] BC 58-70 [Kick]" RememberProfile="true" />
+		</If>
 		<!-- BEGIN BLASTED LANDS QUESTING -->
 		<CustomBehavior File="Message" Text="Compiling Blasted Lands Quests" LogColor="Green" />
 
