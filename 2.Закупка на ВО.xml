@@ -1,60 +1,67 @@
 <HBProfile>
 	<Name>Депозит золота</Name>
 	
-	<QuestOrder>
-		<MoveTo X="-8825.287" Y="596.4655" Z="95.57951" />
+<QuestOrder> 
+	<If Condition="(GetItemCount(103982) &lt; 12)" >	
+	<CustomBehavior File="Message" Text="Иду закупаться Бременем вечности" LogColor="Fuchsia" />	
+		<MoveTo X="-655.927" Y="-5111.497" Z="2.05599" />
+		<CustomBehavior File="InteractWith" MobId="73305" />
+			        	<CustomBehavior File="Misc\RunLua" NumOfTimes="15" WaitTime="1000" Lua="
+						if MerchantFrame:IsVisible()==true then
+							if buffer==nil or buffer&gt;4 then buffer=0 end
+							MerchantRepairAllButton:Click()
+							if buffer&lt;5 then
+								for s=1,GetContainerNumSlots(buffer)
+									do local n=GetContainerItemLink(buffer,s)
+										if (n and strfind(n, &quot;ffffffff&quot;) or n and strfind(n, &quot;ffa335ee&quot;) or n and strfind(n, &quot;ff9d9d9d&quot;) or n and strfind(n, &quot;ff1eff00&quot;) or n and strfind(n, &quot;ff0070dd&quot;)) and n and not n:find(&quot;103982&quot;) and n and not n:find(&quot;82451&quot;)  and n and not n:find(&quot;81916&quot;) and n and not n:find(&quot;81920&quot;) then
+										UseContainerItem(buffer,s)
+									end
+								end
+							buffer=buffer+1
+							end
+						end" />
+		<CustomBehavior File="DeleteItems" Ids="103642" />	
+		<CustomBehavior File="DeleteItems" Ids="103641" />
+		<CustomBehavior File="DeleteItems" Ids="103643" />		
 		<If Condition="(Me.Class == WoWClass.Mage) || (Me.Class == WoWClass.Priest) || (Me.Class == WoWClass.Shaman) || (Me.Class == WoWClass.Warlock)" >
 			<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103987" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+		                                CollectionDistance="50" X="-658.3646" Y="-5108.356" Z="2.056655" />
 		
 			<ElseIf Condition="(Me.Class == WoWClass.Paladin) || (Me.Class == WoWClass.Warrior) || (Me.Class == WoWClass.DeathKnight) " >
 				<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103989" WaitTime="1000"
-			                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+			                                CollectionDistance="50" X="-658.3646" Y="-5108.356" Z="2.056655" />
 			</ElseIf>
 			<Else Condition="(Me.Class == WoWClass.Druid) || (Me.Class == WoWClass.Hunter) || (Me.Class == WoWClass.Rogue) || (Me.Class == WoWClass.Nonk) " >
 				<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103986" WaitTime="1000"
-			                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
+			                                CollectionDistance="50" X="-658.3646" Y="-5108.356" Z="2.056655" />
 			</Else>
 		</If>
+		<While Condition="(GetItemCount(103982) &lt; 12)" >
+			<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
+		                                CollectionDistance="50" X="-658.3646" Y="-5108.356" Z="2.056655" />
+		</While>                                
+	</If> 
 
-		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-		<CustomBehavior File="InteractWith" MobId="73305" InteractByBuyingItemId="103982" WaitTime="1000"
-		                                CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-		<If Condition="Chance(20)">
+
+	<If Condition="Chance(20)">
+		<CustomBehavior File="Message" Text="Иду в Обитель Лета к почтовому ящику №1" LogColor="Fuchsia" />
+		<MoveTo X="1651.545" Y="935.3059" Z="470.9397" /> 
+		<ElseIf Condition="Chance(20)">
+			<CustomBehavior File="Message" Text="Иду в Обитель Лета к почтовому ящику №2" LogColor="Fuchsia" />
 			<MoveTo X="-8825.287" Y="596.4655" Z="95.57951" /> 
-			<ElseIf Condition="Chance(20)">
-				<MoveTo X="-8825.287" Y="596.4655" Z="95.57951" /> 
-			</ElseIf>
-			<ElseIf Condition="Chance(20)">
-				<MoveTo X="-8825.287" Y="596.4655" Z="95.57951" /> 
-			</ElseIf>
-			<ElseIf Condition="Chance(20)">
-				<MoveTo X="-8825.287" Y="596.4655" Z="95.57951" /> 
-			</ElseIf>
-			<Else Condition="Chance(20)">
-				<MoveTo X="-8825.287" Y="596.4655" Z="95.57951" /> 
-			</Else>	
-		</If>                                                               
-	</QuestOrder>
+		</ElseIf>
+		<ElseIf Condition="Chance(20)">
+			<CustomBehavior File="Message" Text="Иду в Обитель Лета к почтовому ящику №3" LogColor="Fuchsia" />
+			<MoveTo X="1672.959" Y="958.9766" Z="489.3914" /> 
+		</ElseIf>
+		<ElseIf Condition="Chance(20)">
+			<CustomBehavior File="Message" Text="Иду в Обитель Лета к почтовому ящику №4" LogColor="Fuchsia" />
+			<MoveTo X="1693.866" Y="892.537" Z="470.924"  /> 
+		</ElseIf>
+		<Else Condition="Chance(20)">
+			<CustomBehavior File="Message" Text="Иду в Обитель Лета к почтовому ящику №5" LogColor="Fuchsia" />
+			<MoveTo X="1698.19" Y="912.5115" Z="470.9359"  /> 
+		</Else>	
+	</If>                                                               
+</QuestOrder>
 </HBProfile>

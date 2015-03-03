@@ -1,0 +1,24 @@
+<HBProfile>
+ <Name>Фарм жаб на вневременном острове и покупка бремени вечности</Name>
+  <MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>true</SellWhite>
+<SellGreen>true</SellGreen>
+<SellBlue>true</SellBlue>
+<SellPurple>true</SellPurple>
+
+<QuestOrder>
+			<CustomBehavior File="Misc\RunLua" Lua="
+								print(&quot;|cFF3399FF|r: Опаньки, у меня же &quot;..GetBackpackCurrencyInfo(1) вневременных монеток!);
+							else
+							print(&quot;|cFF3399FF[Azyul]|r: Your mobile guild bank wasn't detected, continuing run.&quot;)
+							end" />
+	
+	<MoveTo X="1770.003" Y="916.9053" Z="487.2741" />
+</QuestOrder>
+</HBProfile>
