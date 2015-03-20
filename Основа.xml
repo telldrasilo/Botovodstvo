@@ -4,16 +4,20 @@
     <MaxLevel>1001</MaxLevel>
 
 <QuestOrder>
-	<CustomBehavior File="EnablePlugin" Names="LogMeOut!" />
-    	<If Condition="Me.IsAlliance">
-           <If Condition="Me.Level &lt; 15" >
-           		<CustomBehavior File="EnablePlugin" Names="LogMeOut!" />
-           		<CustomBehavior File="UserDialog" AllowBotStop="true" SoundCue="Exclamation" SoundCueInterval="10" ExpiryTime="15"
-                                Text="Настраиваем LogMeOut прописываем получателя почты и др." />
+	<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
+		<If Condition="Me.IsAlliance">
+       		 <If Condition="Me.Level &lt; 15" >
+       		 	<CustomBehavior File="EnablePlugin" Names="LogMeOut!" />
 				<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\Classic\[A - Quest] 1-58 [Kick]\[A - Quest] 1-12 Auto-Loader [Kick]" />
    			</If>
-
    			<If Condition="Me.Level == 15" >
+   				<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
+   				<If Condition="HasItem(6948)">
+					<CustomBehavior File="Message" Text="Телепорт домой" LogColor="Fuchsia" />
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
+					<CustomBehavior File="WaitTimer" WaitTime="10000" />		
+				</If>
+   				
    				<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
    				<CustomBehavior File="RunMacro" Macro="/run for i=1,GetNumQuestLogEntries() do SelectQuestLogEntry(i); SetAbandonQuest(); AbandonQuest(); end" />
 				<CustomBehavior File="LoadProfile" ProfileName="1.Гербовые накидки и таверна" RememberProfile="True" />
@@ -23,18 +27,24 @@
    		<If Condition="Me.IsHorde">
        		 <If Condition="Me.Level &lt; 15" >
        		 	<CustomBehavior File="EnablePlugin" Names="LogMeOut!" />
-       		 		<If Condition="(Me.Race == WoWRace.Undead) || Me.Level &gt; 12 " >
+       		 		<If Condition="(Me.Race == WoWRace.Undead) &amp;&amp; Me.Level &gt; 12 " >
        		 			<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\Classic\[H - Quest] 1-58 [Kick]\[H - Quest] 12-58 K-EK [Kick]" />
        		 		</If>
 				<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\Classic\[H - Quest] 1-58 [Kick]\[H - Quest] 1-12 Auto-Loader [Kick]" />
    			</If>
    			<If Condition="Me.Level == 15" >
+   				<If Condition="HasItem(6948)">
+					<CustomBehavior File="Message" Text="Телепорт домой" LogColor="Fuchsia" />
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
+					<CustomBehavior File="WaitTimer" WaitTime="10000" />		
+				</If>
+   				
    				<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
    				<CustomBehavior File="RunMacro" Macro="/run for i=1,GetNumQuestLogEntries() do SelectQuestLogEntry(i); SetAbandonQuest(); AbandonQuest(); end" />
 				<CustomBehavior File="LoadProfile" ProfileName="1.Гербовые накидки и таверна" RememberProfile="True" />
 			</If>
    		</If>
-
+   		
    	<!-- ДК подготовка -->
 			<If Condition="Me.Class == WoWClass.DeathKnight" >
 				<If Condition="Me.Level == 55">
@@ -44,12 +54,7 @@
 
 	<!-- В Пандарию с 89 по 90 -->		
 		<If Condition="Me.IsAlliance">
-           <If Condition="Me.Level &gt; 88" >
-           		<If Condition="HasItem(6948)">
-					<CustomBehavior File="Message" Text="Телепорт домой" LogColor="Fuchsia" />
-					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
-					<CustomBehavior File="WaitTimer" WaitTime="10000" />		
-				</If>
+           <If Condition="Me.Level &gt; 87" >
 				<CustomBehavior File="LoadProfile" ProfileName="Тренировка и поехали" />
 				<If Condition="Me.GetSkill(Styx.SkillLine.Riding).CurrentValue &gt; 75">
 					<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[A - Quest] 85-86 The Jade Forest [Kick]" />
@@ -68,52 +73,71 @@
 			</If>
    		</If>
    		<If Condition="Me.IsHorde">
-           <If Condition="(Me.Level &gt; 88" >
-           	<!--	<If Condition="HasItem(6948)">
-					<CustomBehavior File="Message" Text="Телепорт домой" LogColor="Fuchsia" />
-					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
-					<CustomBehavior File="WaitTimer" WaitTime="10000" />		
-				</If> -->
-				<If Condition="(Me.Level &lt; 90" >
-					<If Condition="Me.GetSkill(Styx.SkillLine.Riding).CurrentValue == 225 &amp;&amp; CanFly()">
-						<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[H - Quest] 85-86 The Jade Forest [Kick]" />
-						<Else>
-							<CustomBehavior File="LoadProfile" ProfileName="Тренировка и поехали" />
+            <If Condition="Me.Level &gt; 87" >
+            	<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
+            	<If Condition="Me.ZoneId == 5785" >
+           			<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[H - Quest] 85-86 The Jade Forest [Kick]" RememberProfile="True" /> 
+           			<Else>
+           				<If Condition="!HasSpell(90267) &amp;&amp; Me.Gold &gt;= 250">
+						      <CustomBehavior File="Message" Text="Собираюсь идти тренироваться для полетов" LogColor="Aquamarine" />
+						      <CustomBehavior File="LoadProfile" ProfileName="Тренировка и поехали" />
+					    </If>
+           			</Else>
+           		</If>
+            	 
+            	<If Condition="Me.Level == 90" >
+            		<If Condition="Me.ZoneId == 6720 || Me.ZoneId == 7025" >
+            			<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\WoD\[H - Quest] 90-92 Frostfire Ridge [Kick]" RememberProfile="True" />
+            			<Else>
+            				<While Condition="Me.ZoneId == 5785" >
+				   				<CustomBehavior File="Message" Text="Я домой" LogColor="Fuchsia" />
+				   				<If Condition="HasItem(6948)">
+									<CustomBehavior File="Message" Text="Using our Hearthstone." LogColor="Fuchsia" />
+									<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
+									<CustomBehavior File="WaitTimer" WaitTime="10000" />		
+								</If>
+								<CustomBehavior File="RunMacro" Macro="/run for i=1,GetNumQuestLogEntries() do SelectQuestLogEntry(i); SetAbandonQuest(); AbandonQuest(); end" />
+
+								<If Condition="!HasQuest(34398) &amp;&amp; !IsQuestCompleted(34398)" >
+											<PickUp QuestName="The Dark Portal" QuestId="34398" GiverName="Warchiefs Command Board" GiverId="206109" X="1596.325" Y="-4365.863" Z="21.06839" />
+								</If>							
+
+								<CustomBehavior File="FlyTo" X="1769.893" Y="-4326.699" Z="-8.332328"  />
+								<CustomBehavior File="InteractWith" MobId="235877" X="1767.899" Y="-4326.429" Z="-8.405741" TerminateWhen="Me.MapId == 530" />
+								<CustomBehavior File="WaitTimer" WaitTime="500"/>
+
+								<CustomBehavior File="FlyTo" DestName="near Khadgar" X="-11806.83" Y="-3203.989" Z="-28.92494" />
+								<CustomBehavior File="InteractWith" MobId="78423" GossipOptions="1" ProactiveCombatStrategy="ClearMobsTargetingUs" NonCompeteDistance="0" KeepTargetSelected="True" Range="6" X="-11812.26" Y="-3205.597" Z="-29.56283" /> <!-- Khadgar -->
+								<CustomBehavior File="Misc\RunLua" Lua="StaticPopup1Button1:Click()" WaitTime="1000" />
+
+								<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\WoD\[H - Quest] 90-92 Frostfire Ridge [Kick]" RememberProfile="True" />
+							</While>
+            				<While Condition="Me.ZoneId == 14" >
+            					<CustomBehavior File="FlyTo" X="1769.893" Y="-4326.699" Z="-8.332328"  />
+								<CustomBehavior File="InteractWith" MobId="235877" X="1767.899" Y="-4326.429" Z="-8.405741" TerminateWhen="Me.MapId == 530" />
+								<CustomBehavior File="WaitTimer" WaitTime="500" />
+
+								<CustomBehavior File="FlyTo" DestName="near Khadgar" X="-11806.83" Y="-3203.989" Z="-28.92494" />
+								<CustomBehavior File="InteractWith" MobId="78423" GossipOptions="1" ProactiveCombatStrategy="ClearMobsTargetingUs" NonCompeteDistance="0" KeepTargetSelected="True" Range="6" X="-11812.26" Y="-3205.597" Z="-29.56283" /> <!-- Khadgar -->
+								<CustomBehavior File="Misc\RunLua" Lua="StaticPopup1Button1:Click()" WaitTime="1000" />
+
+								<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\WoD\[H - Quest] 90-92 Frostfire Ridge [Kick]" RememberProfile="True" />
+							</While>
+							<While Condition="Me.ZoneId == 4" >
+            					<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\WoD\[H - Quest] 90-92 Frostfire Ridge [Kick]" RememberProfile="True" />
+							</While>	
 						</Else>
-					</If>	
-				</If>
+					</If>		
+		   			<Else>
+		   				<CustomBehavior File="LoadProfile" ProfileName="Тренировка и поехали" />
+		   			</Else>	
+	   			</If>
+				
    			</If>
+   		</If>
 
-   			<If Condition="(Me.MapId != 945) || (Me.MapId != 941) || (Me.MapId != 970) || (Me.MapId != 976) "  >
-   				<CustomBehavior File="Message" Text="Я на дреноре" LogColor="Fuchsia" />
-				<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\WoD\[H - Quest] 90-92 Frostfire Ridge [Kick]" RememberProfile="True" />
-   			</If>	
-
-   			<If Condition="Me.Level == 90 &amp;&amp; (Me.MapId != 4) || (Me.MapId != 806) " >
-   				<CustomBehavior File="Message" Text="Я домой" LogColor="Fuchsia" />
-   				<CustomBehavior File="RunMacro" Macro="/run for i=1,GetNumQuestLogEntries() do SelectQuestLogEntry(i); SetAbandonQuest(); AbandonQuest(); end" />
-   				<If Condition="HasItem(6948)">
-					<CustomBehavior File="Message" Text="Using our Hearthstone." LogColor="Fuchsia" />
-					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
-					<CustomBehavior File="WaitTimer" WaitTime="10000" />		
-				</If>
-
-				<CustomBehavior File="FlyTo" X="1792.593" Y="-4277.689" Z="7.512893" />
-				<While Condition="Me.MapId != 530" >
-					<CustomBehavior File="InteractWith" MobId="195142" X="1791.696" Y="-4273.472" Z="7.674594" TerminateWhen="Me.MapId == 530" />
-					<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 530 || Me.Combat" />
-				</While>
-				<CustomBehavior File="FlyTo" X="-11815.42" Y="-3204.917" Z="-29.91671" />
-				<MoveTo DestName="near Khadgar" X="-11806.83" Y="-3203.989" Z="-28.92494" />
-				<CustomBehavior File="InteractWith" MobId="78423" GossipOptions="1" ProactiveCombatStrategy="ClearMobsTargetingUs" NonCompeteDistance="0" KeepTargetSelected="True" Range="6" X="-11812.26" Y="-3205.597" Z="-29.56283" /> <!-- Khadgar -->
-				<CustomBehavior File="Misc\RunLua" Lua="StaticPopup1Button1:Click()" WaitTime="1000" />
-				<CustomBehavior File="Misc\RunLua" Lua="if MovieFrame and MovieFrame:IsVisible() then MovieFrame:StopMovie() elseif CinematicFrame and CinematicFrame:IsVisible() then CinematicFrame_CancelCinematic() end" WaitTime="3000" />                               
-				<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\WoD\[H - Quest] 90-92 Frostfire Ridge [Kick]" RememberProfile="True" />
-   			</If>
-   			</If>	
-
-   		<If Condition="Me.IsAlliance">
-	   		<If Condition="(!IsQuestCompleted(34124)">
+   		<!--<If Condition="Me.IsAlliance">
+	   		<If Condition="!IsQuestCompleted(34124)">
 	   			<If Condition="HasItem(6948)">
 						<CustomBehavior File="Message" Text="Телепорт домой" LogColor="Fuchsia" />
 						<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
@@ -124,7 +148,7 @@
 		</If>
 		
    		<If Condition="Me.IsHorde">
-	   		<If Condition="(!IsQuestCompleted(33256)">
+	   		<If Condition="!IsQuestCompleted(33256)">
 	   			<If Condition="HasItem(6948)">
 						<CustomBehavior File="Message" Text="Телепорт домой" LogColor="Fuchsia" />
 						<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
@@ -132,6 +156,6 @@
 				</If>
 				<CustomBehavior File="LoadProfile" ProfileName="Фармим жаб" />			
 			</If>
-		</If>			
+		</If>	-->		
 </QuestOrder>
 </HBProfile>

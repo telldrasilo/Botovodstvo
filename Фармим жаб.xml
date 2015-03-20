@@ -97,6 +97,26 @@
 
 <while condition="true">
        	<While Condition="(Me.FreeBagSlots &gt; 17)" >
+       		<While Condition="(Me.Class == WoWClass.Druid)" > <!-- Druid, 8921 *should* be backwards compatible with Sunfire but the behavior acts up, so we're using Wrath instead... -->
+				<CustomBehavior File="InteractWith" IgnoreCombat="False" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="5176" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" >
+				<HuntingGrounds WaypointVisitStrategy="Random" >
+						<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
+						<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
+						<Hotspot X="-851.7402" Y="-5685.249" Z="2.501523" />
+						<Hotspot X="-887.4246" Y="-5691.018" Z="2.782298" />
+						<Hotspot X="-916.6104" Y="-5671.801" Z="2.644856" />
+						<Hotspot X="-955.4318" Y="-5644.188" Z="2.125715" />
+						<Hotspot X="-976.1139" Y="-5608.432" Z="4.238826" />
+						<Hotspot X="-1000.876" Y="-5582.854" Z="2.488306" />
+						<Hotspot X="-959.7966" Y="-5556.823" Z="5.001213" />
+						<Hotspot X="-928.7125" Y="-5549.608" Z="2.485685" />
+						<Hotspot X="-924.8749" Y="-5590.662" Z="2.467258" />
+						<Hotspot X="-932.7372" Y="-5617.22" Z="5.418079" />
+						<Hotspot X="-901.3912" Y="-5640.016" Z="3.538862" />
+						<Hotspot X="-851.9879" Y="-5647.238" Z="3.119804" />
+					</HuntingGrounds>
+				</CustomBehavior>
+			</While>
   			<While Condition="(Me.Class == WoWClass.Priest)" > <!-- Priest, Shadow Word: Pain - Needs support for other Disc and Holy -->
 			<CustomBehavior File="InteractWith" IgnoreCombat="False" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="589" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" >
 				<HuntingGrounds WaypointVisitStrategy="Random" >
@@ -117,6 +137,27 @@
 					</HuntingGrounds>
 				</CustomBehavior>
 			</While>
+
+		<While Condition="(Me.Class == WoWClass.Shaman)" >  <!-- Shaman, Chain Lightning -->
+			<CustomBehavior File="InteractWith" IgnoreCombat="False" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="403" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" >
+				<HuntingGrounds WaypointVisitStrategy="Random" >
+						<Hotspot X="-787.0182" Y="-5640.695" Z="5.098309" />
+						<Hotspot X="-816.4632" Y="-5661.713" Z="2.298313" />
+						<Hotspot X="-851.7402" Y="-5685.249" Z="2.501523" />
+						<Hotspot X="-887.4246" Y="-5691.018" Z="2.782298" />
+						<Hotspot X="-916.6104" Y="-5671.801" Z="2.644856" />
+						<Hotspot X="-955.4318" Y="-5644.188" Z="2.125715" />
+						<Hotspot X="-976.1139" Y="-5608.432" Z="4.238826" />
+						<Hotspot X="-1000.876" Y="-5582.854" Z="2.488306" />
+						<Hotspot X="-959.7966" Y="-5556.823" Z="5.001213" />
+						<Hotspot X="-928.7125" Y="-5549.608" Z="2.485685" />
+						<Hotspot X="-924.8749" Y="-5590.662" Z="2.467258" />
+						<Hotspot X="-932.7372" Y="-5617.22" Z="5.418079" />
+						<Hotspot X="-901.3912" Y="-5640.016" Z="3.538862" />
+						<Hotspot X="-851.9879" Y="-5647.238" Z="3.119804" />
+					</HuntingGrounds>
+				</CustomBehavior>
+			</While>	
 
       <While Condition="(Me.Class == WoWClass.Hunter)" >  <!-- Hunter, Arcane Shot -->
 			<CustomBehavior File="InteractWith" IgnoreCombat="False" IgnoreLoSToTarget="False" MobState="AliveNotInCombat" MobId1="72777" InteractByCastingSpellId="3044" WaitForNpcs="False" Range="39" PreInteractMountStrategy="Dismount" NumOfTimes="1" >

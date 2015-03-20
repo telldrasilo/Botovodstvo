@@ -1,0 +1,409 @@
+<HBProfile>
+<Name>Endless Shadow Labrynth Farm [$Rev: 1128 $]</Name>
+<MinFreeBagSlots>-1</MinFreeBagSlots>
+///////////////////////////////////////////////////////////////////////////////////////////
+// Profile Developer: Echo
+// Farm zone: Shadow Labrynth
+// Farm mobs: All
+///////////////////////////////////////////////////////////////////////////////////////////
+
+<MinLevel>54</MinLevel>
+<MaxLevel>101</MaxLevel>
+
+<MailGrey>False</MailGrey>
+<MailWhite>True</MailWhite>
+<MailGreen>True</MailGreen>
+<MailBlue>True</MailBlue>
+<MailPurple>True</MailPurple>
+
+<SellGrey>True</SellGrey>
+<SellWhite>False</SellWhite>
+<SellGreen>False</SellGreen>
+<SellBlue>True</SellBlue>
+<SellPurple>False</SellPurple>
+
+<!-- Protected Items list, can add to these as you see fit, if you are looking for specific items -->
+<ProtectedItems>
+</ProtectedItems>
+		
+<AvoidMobs>
+	<Mob Name="Summon Enabler Stalker" Entry="53488" />
+</AvoidMobs>
+
+
+<Blackspots>
+</Blackspots>
+	
+<QuestOrder>
+<If Condition="!(Me.MapId == 555)" >
+
+<If Condition="Me.MapId != 530 &amp;&amp; !Me.IsInInstance" >
+	<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: Going to Outlands!&quot;);" />
+	<If Condition="Me.IsAlliance" >
+		<!-- /// Mage Logic /// -->
+		<If Condition="SpellManager.CanCast(33690)" > <!-- Checks if we're a mage and spell is fully learnt+castable -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're a Mage! Teleporting to Shattrath.&quot;);" />
+			<CustomBehavior File="ForcedDismount" />
+			<While Condition="Me.MapId != 530" >
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(33690);" WaitTime="500" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 530 || Me.Combat || !Me.IsCasting" />
+			</While>
+		</If>
+		<!-- /// Item Teleportation Logic.   Teleport to area that has portals (Shrine/etc) or teleport to destination /// -->
+		<If Condition="Me.MapId != 530 &amp;&amp; ((Me.HearthstoneAreaId == 5148 || Me.HearthstoneAreaId == 6484 || Me.HearthstoneAreaId == 4395) &amp;&amp; ((HasItem(6948) &amp;&amp; !WoWSpell.FromId(8690).Cooldown) || SpellManager.CanCast(556) || (HasItem(64488) &amp;&amp; !WoWSpell.FromId(94719).Cooldown)))" > <!-- If we can Hearth/Recall to the Shrine or Dalaran -->
+			<If Condition="HasItem(6948) &amp;&amp; !WoWSpell.FromId(8690).Cooldown" > <!-- Hearth -->
+				<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: Hearthing would be faster to reach our destination, attempting to Hearth!&quot;);" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!(Me.MapId == 870 || Me.MapId == 571)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="500" />
+					<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 870 || Me.MapId == 571 || Me.Combat || !Me.IsCasting" />
+				</While>
+			<ElseIf Condition="SpellManager.CanCast(556)" > <!-- Astral Recall -->
+				<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: Hearthing would be faster, but our Hearthstone is on cooldown.  Attempting to Astrall Recall!&quot;);" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!(Me.MapId == 870 || Me.MapId == 571)" >
+					<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(556);" WaitTime="500" />
+					<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 870 || Me.MapId == 571 || Me.Combat || !Me.IsCasting" />
+				</While>
+			</ElseIf>
+			<ElseIf Condition="HasItem(64488) &amp;&amp; !WoWSpell.FromId(94719).Cooldown" > <!-- Innkeeper's Daughter -->
+				<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: Hearthing would be faster, but our Hearthstone is on cooldown.  Attempting to Innkeeper's Daughter!&quot;);" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!(Me.MapId == 870 || Me.MapId == 571)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(94719)" WaitTime="500" />
+					<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 870 || Me.MapId == 571 || Me.Combat || !Me.IsCasting" />
+				</While>
+			</ElseIf>
+			</If>
+		</If>
+		<!-- /// Generic Logic /// -->
+		<If Condition="Me.MapId == 870" > <!-- Pandaria -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Pandaria, using the Shrine portal to Outlands.&quot;);" />
+			<If Condition="Me.ZoneId != 6553" > <!-- If not inside of Shrine building -->
+				<CustomBehavior File="FlyTo" X="861.8756" Y="283.1115" Z="503.678" />
+			</If>
+			<RunTo X="794.5083" Y="184.9345" Z="519.6282" />
+			<While Condition="Me.MapId != 530" >
+				<CustomBehavior File="InteractWith" MobId="215120" X="792.5026" Y="186.9333" Z="519.9391" TerminateWhen="Me.MapId == 530" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 530 || Me.Combat" />
+			</While>
+		</If>
+		<If Condition="Me.MapId == 571" > <!-- Northerend -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Northerend, using the Dalaran portal to Stormwind.&quot;);" />
+			<CustomBehavior File="FlyTo" X="5719.701" Y="722.6963" Z="641.6025" />
+			<While Condition="Me.MapId != 0" >
+				<CustomBehavior File="InteractWith" MobId="190960" X="5719.184" Y="719.6667" Z="641.7278" TerminateWhen="Me.MapId == 0" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 0 || Me.Combat" />
+			</While>
+		</If>
+		<If Condition="(Me.ZoneId == 3557 || Me.ZoneId == 3524 || Me.ZoneId == 6456 || Me.ZoneId == 3525)" > <!-- Instanced Draenei Zone, shares MapId with Outlands so we're using ZoneId -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're a in Azuyremyst Isle, using the Exodar portal to Outlands.&quot;);" />
+			<RunTo X="-4049.003" Y="-11575.71" Z="-138.5305" />
+			<While Condition="Me.MapId != 530" >
+				<CustomBehavior File="InteractWith" MobId="195141" X="-4053.682" Y="-11575.2" Z="-138.5848" TerminateWhen="Me.MapId == 530" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 530 || Me.Combat" />
+			</While>
+		</If>
+		<If Condition="Me.MapId == 1" > <!-- Kalimdor -->
+			<!-- <If Condition="" >  Southern Kalimdor, Ratchet to Booty Bay -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Kalimdor, using the Ratchet boat to Booty Bay.&quot;);" />
+			<CustomBehavior File="FlyTo" X="-995.5635" Y="-3827.638" Z="5.630721" />
+			<CustomBehavior File="UseTransport" TransportId="20808"
+				WaitAtX="-996.8669" WaitAtY="-3826.07" WaitAtZ="5.536246" 
+				TransportStartX="-1005.613" TransportStartY="-3841.648" TransportStartZ="0.01553879"
+				StandOnX="-997.3311" StandOnY="-3836.707" StandOnZ="6.030852"
+				TransportEndX="-14277.75" TransportEndY="582.8661" TransportEndZ="0.03330701"
+				GetOffX="-14280.88" GetOffY="566.6268" GetOffZ="6.979454"
+			/>
+			<!-- <If Condition="" >  Northern Kalimdor, Rut'theran Village to Stormwind 
+				<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Northern Kalimdor, using the Rut'theran Village boat to Stormwind.&quot;);" />
+				May not use this.  Not sure if the OffMeshConnections will carry the bot to Rut'theran properly.
+			</If> -->
+		</If>
+		<If Condition="Me.MapId == 646" > <!-- Deepholm -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Deepholm, using the portal for Stormwind.&quot;);" />
+			<CustomBehavior File="FlyTo" X="968.8371" Y="573.3804" Z="-44.5801" />
+			<While Condition="Me.MapId != 0" >
+				<CustomBehavior File="InteractWith" MobId="205272" X="965.25" Y="577.229" Z="-44.2583" TerminateWhen="Me.MapId == 0" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 0 || Me.Combat" />
+			</While>
+		</If>
+		<If Condition="Me.MapId == 1116" > <!-- Draenor -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Draenor, using the Ashran portal to Stormwind.&quot;);" />
+			<RunTo X="3732.467" Y="-4043.326" Z="44.81949" />
+			<While Condition="Me.MapId != 0" >
+				<CustomBehavior File="InteractWith" MobId="235883" X="3734.65" Y="-4042.976" Z="44.81873" TerminateWhen="Me.MapId == 0" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 0 || Me.Combat" />
+			</While>
+		</If>
+		<If Condition="Me.MapId == 0" > <!-- Eastern Kingdoms -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Eastern Kingdoms, using the Stormwind portal to Outlands.&quot;);" />
+			<CustomBehavior File="FlyTo" X="-9000.305" Y="856.6206" Z="29.6206" />
+			<While Condition="Me.MapId != 530" >
+				<CustomBehavior File="InteractWith" MobId="195141" X="-9003.66" Y="855.3229" Z="29.62067" TerminateWhen="Me.MapId == 530" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 530 || Me.Combat" />
+			</While>
+		</If>
+	</If>
+
+	<If Condition="Me.IsHorde" >
+		<!-- /// Mage Logic /// -->
+		<If Condition="SpellManager.CanCast(35715)" > <!-- Checks if we're a mage and spell is fully learnt+castable -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're a Mage! Teleporting to Shattrath.&quot;);" />
+			<CustomBehavior File="ForcedDismount" />
+			<While Condition="Me.MapId != 0" >
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(35715);" WaitTime="500" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 530 || Me.Combat || !Me.IsCasting" />
+			</While>
+		</If>
+		<!-- /// Item Teleportation Logic.   Teleport to area that has portals (Shrine/etc) or teleport to destination /// -->
+		<If Condition="Me.MapId != 530 &amp;&amp; ((Me.HearthstoneAreaId == 6484 || Me.HearthstoneAreaId == 4395) &amp;&amp; ((HasItem(6948) &amp;&amp; !WoWSpell.FromId(8690).Cooldown) || SpellManager.CanCast(556) || (HasItem(64488) &amp;&amp; !WoWSpell.FromId(94719).Cooldown)))" > <!-- If we can Hearth/Recall to the Shrine or Dalaran -->
+			<If Condition="HasItem(6948) &amp;&amp; !WoWSpell.FromId(8690).Cooldown" > <!-- Hearth -->
+				<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: Hearthing would be faster to reach our destination, attempting to Hearth!&quot;);" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!(Me.MapId == 870 || Me.MapId == 571)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="500" />
+					<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 870 || Me.MapId == 571 || Me.Combat || !Me.IsCasting" />
+				</While>
+			<ElseIf Condition="SpellManager.CanCast(556)" > <!-- Astral Recall -->
+				<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: Hearthing would be faster, but our Hearthstone is on cooldown.  Attempting to Astrall Recall!&quot;);" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!(Me.MapId == 870 || Me.MapId == 571)" >
+					<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(556);" WaitTime="500" />
+					<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 870 || Me.MapId == 571 || Me.Combat || !Me.IsCasting" />
+				</While>
+			</ElseIf>
+			<ElseIf Condition="HasItem(64488) &amp;&amp; !WoWSpell.FromId(94719).Cooldown" > <!-- Innkeeper's Daughter -->
+				<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: Hearthing would be faster, but our Hearthstone is on cooldown.  Attempting to Innkeeper's Daughter!&quot;);" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!(Me.MapId == 870 || Me.MapId == 571)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(94719)" WaitTime="500" />
+					<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 870 || Me.MapId == 571 || Me.Combat || !Me.IsCasting" />
+				</While>
+			</ElseIf>
+			</If>
+		</If>
+		<!-- /// Generic Logic /// -->
+		<If Condition="Me.MapId == 870" > <!-- Pandaria -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Pandaria, using the Shrine portal to Shattrath.&quot;);" />
+			<If Condition="Me.ZoneId != 6141" > <!-- If not inside of Shrine building -->
+				<CustomBehavior File="FlyTo" X="1629.72" Y="924.5151" Z="471.1836" />
+			</If>
+			<RunTo X="1725.195" Y="875.6638" Z="487.0624" />
+			<While Condition="Me.MapId != 530" >
+				<CustomBehavior File="InteractWith" MobId="215113" X="1709.74" Y="899.3869" Z="487.0404" TerminateWhen="Me.MapId == 530" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 530 || Me.Combat" />
+			</While>
+		</If>
+		<If Condition="Me.MapId == 571" > <!-- Northerend -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Northerend, using the Dalaran portal to Orgrimmar.&quot;);" />
+			<CustomBehavior File="FlyTo" X="5923.893" Y="589.9543" Z="639.8708" />
+			<While Condition="Me.MapId != 1" >
+				<CustomBehavior File="InteractWith" MobId="191009" X="5925.874" Y="593.1875" Z="640.5933" TerminateWhen="Me.MapId == 1" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 1 || Me.Combat" />
+			</While>
+		</If>
+		<If Condition="Me.MapId == 0" > <!-- Eastern Kingdoms, may want to spit this up for southern/northern Eastern Kingdoms (UC, BB) -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Eastern Kingdoms, using the Undercity Zeppelin to Kalimdor.&quot;);" />
+			<CustomBehavior File="FlyTo" X="2060.415" Y="359.8524" Z="82.48592" />
+			<CustomBehavior File="ForcedDismount" />
+			<RunTo WaitAtX="2061.913" WaitAtY="365.0161" WaitAtZ="82.51536" />
+			<CustomBehavior File="UseTransport" TransportId="181689"
+				WaitAtX="2061.913" WaitAtY="365.0161" WaitAtZ="82.51536" 
+				TransportStartX="2056.493" TransportStartY="381.6347" TransportStartZ="100.362" 
+				StandOnX="2058.949" StandOnY="374.2945" StandOnZ="82.47006" 
+				TransportEndX="1989.353" TransportEndY="-6082.776" TransportEndZ="85.59646" 
+				GetOffX="1975.918" GetOffY="-6098.104" GetOffZ="67.14719" />
+		</If>
+		<!--<If Condition="Me.MapId == 530" >  Instanced Draenei Zone 
+			Do we really need Horde support for this?
+		</If> -->
+		<If Condition="Me.MapId == 1116" > <!-- Draenor -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Draenor, using the Ashran portal to Orgrimmar.&quot;);" />
+			<RunTo X="5266.4" Y="-4075.891" Z="21.13024" />
+			<While Condition="Me.MapId != 1" >
+				<CustomBehavior File="InteractWith" MobId="235880" X="5266.4" Y="-4075.891" Z="21.13024" TerminateWhen="Me.MapId == 1" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 1 || Me.Combat" />
+			</While>
+		</If>
+		<If Condition="Me.MapId == 646" > <!-- Deepholm -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Deepholm, using the portal for Orgrimmar.&quot;);" />
+			<CustomBehavior File="FlyTo" X="991.8574" Y="458.2401" Z="-44.27066" />
+			<While Condition="Me.MapId != 1" >
+				<CustomBehavior File="InteractWith" MobId="205273" X="990.495" Y="454.457" Z="-44.2477" TerminateWhen="Me.MapId == 1" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 1 || Me.Combat" />
+			</While>
+		</If>
+		<If Condition="Me.MapId == 1" > <!-- Kalimdor -->
+			<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We're in Kalimdor, taking the Orgrimmar portal to Outlands.&quot;);" />
+			<CustomBehavior File="FlyTo" X="1792.593" Y="-4277.689" Z="7.512893" />
+			<While Condition="Me.MapId != 530" >
+				<CustomBehavior File="InteractWith" MobId="195142" X="1791.696" Y="-4273.472" Z="7.674594" TerminateWhen="Me.MapId == 530" />
+				<CustomBehavior File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 530 || Me.Combat" />
+			</While>
+		</If>
+	</If>
+	<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.DeepSkyBlue, &quot;[Azyul Navigator]: We have reached Outlands!&quot;);" />
+</If>
+</If>
+
+<While Condition="true" >
+	<If Condition="!(Me.MapId == 555)" >
+		<If Condition="Me.Location.Distance(new WoWPoint(-3380.169, 4955.083, -61.19794)) &gt;= 170" > <!-- Universal Nav-to -->
+			<CustomBehavior File="UserSettings" FindVendorsAutomatically="False" LootMobs="True" PullDistance="30" LogoutForInactivity="False" />
+			<CustomBehavior File="FlyTo" X="-3385.121" Y="4941.416" Z="-54.78403" />  <!-- Mid-Hub -->
+			<CustomBehavior File="FlyTo" X="-3531.432" Y="4943.946" Z="-101.3962" />
+		</If>
+
+		<If Condition="Me.Location.Distance(new WoWPoint(-3535.028, 4942.239, -101.3962)) &lt;= 20" > <!-- If we just vendored -->
+			<CustomBehavior File="MyCTM" X="-3553.89" Y="4943.018" Z="-101.3958" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="WaitTimer" WaitTime="500" />
+			<CustomBehavior File="InteractWith" MobId="183294" MobState="DontCare" X="-3556.407" Y="4943.071" Z="-101.1189" />
+			<CustomBehavior File="MyCTM" X="-3617.92" Y="4942.742" Z="-101.0486" />
+		</If>
+	</If>
+
+	<While Condition="(Me.FreeBagSlots &gt;= 11)" >
+		<If Condition="!(Me.MapId == 555)" >
+			<RunTo X="-3644.636" Y="4943.016" Z="-101.048" />
+			<CustomBehavior File="RunMacro" Macro="/script ResetInstances()" /> 
+			<CustomBehavior File="Message" Text="Entering Shadow Labrynth." LogColor="Lime" />
+			<CustomBehavior File="MyCTM" X="-3651.557" Y="4942.885" Z="-101.048" />
+			<CustomBehavior File="WaitTimer" WaitTime="5500" />
+			<While Condition="!(StyxWoW.IsInWorld)" >
+				<CustomBehavior File="WaitTimer" WaitTime="1000" />
+			</While>
+		</If>
+		<!-- Begin Instance Grind -->
+		<If Condition="(Me.MapId == 555)" >
+			<CustomBehavior File="Misc\InstanceTimer" Timer="Start" />
+
+			<RunTo X="-27.07503" Y="0.1348429" Z="-1.12795" />
+
+
+			<RunTo X="-58.36637" Y="16.83826" Z="-1.129571" />
+			<RunTo X="-86.88229" Y="11.11363" Z="-1.129571" />
+			<RunTo X="-59.42251" Y="-25.79194" Z="-1.130082" />
+			<RunTo X="-77.62769" Y="-37.6753" Z="-1.130095" />
+			<RunTo X="-73.45036" Y="-50.971" Z="-1.130095" />
+			<RunTo X="-45.23825" Y="-35.62411" Z="-1.129781" />
+			<RunTo X="-36.73963" Y="-85.09788" Z="-1.12978" />
+			<RunTo X="-74.38319" Y="-76.95082" Z="-1.134051" />
+			<RunTo X="-91.24065" Y="-87.63718" Z="-1.128278" />
+
+			<RunTo X="-63.12197" Y="-97.46471" Z="-1.12826" />
+			<RunTo X="-155.2914" Y="-102.0209" Z="8.072185" />
+
+
+			<RunTo X="-168.6227" Y="-76.38097" Z="8.066394" />
+			<RunTo X="-169.8285" Y="-77.88277" Z="8.064063" />//
+			<RunTo X="-154.5018" Y="-62.54964" Z="8.071632" />
+			<RunTo X="-144.1296" Y="-79.32704" Z="8.065796" />
+			<RunTo X="-150.6941" Y="-17.2215" Z="8.071649" />
+			<RunTo X="-145.055" Y="1.665004" Z="8.071649" />
+			<RunTo X="-178.8765" Y="0.2296398" Z="8.073044" />
+
+			<CustomBehavior File="InteractWith" MobId="18731" ObjectType="Npc" MobState="DontCare" Range="1" X="-156.6754" Y="4.982729" Z="8.073087" /> <!-- Pull Ambassador Hellmaw -->
+
+			<RunTo X="-190.683" Y="-38.30504" Z="8.073039" />
+			<RunTo X="-226.2947" Y="-38.76897" Z="8.073039" />
+
+			<RunTo X="-248.5667" Y="-47.28663" Z="8.072861" /> 
+			<RunTo X="-264.4563" Y="-46.63173" Z="8.072868" />
+			<RunTo X="-272.9473" Y="-46.57486" Z="8.072886" />
+			<RunTo X="-266.279" Y="-80.63223" Z="8.072958" />
+			<RunTo X="-276.6472" Y="-77.95573" Z="8.072981" />
+			<RunTo X="-287.5431" Y="-98.47974" Z="8.072981" />
+			<RunTo X="-264.4238" Y="-29.93591" Z="8.096051" />
+			<RunTo X="-274.2337" Y="-3.588236" Z="8.07407" />
+			<RunTo X="-281.1602" Y="21.90212" Z="8.073065" />
+
+			<CustomBehavior File="InteractWith" MobId="18667" ObjectType="Npc" MobState="DontCare" Range="1" X="-322.3477" Y="-47.91201" Z="12.68885" /> <!-- Pull Blackheart the Inciter -->
+
+			<RunTo X="-348.2052" Y="-38.85544" Z="12.68886" />
+
+			<RunTo X="-431.2047" Y="-98.43049" Z="12.68969" />
+			<RunTo X="-440.593" Y="-114.0275" Z="16.02175" />
+			<RunTo X="-425.4536" Y="-148.0698" Z="13.27492" />
+			<RunTo X="-417.2423" Y="-191.836" Z="15.01276" />
+			<RunTo X="-445.4976" Y="-190.0845" Z="12.68918" />
+
+			<RunTo X="-431.7294" Y="-198.7609" Z="12.68918" />
+			<RunTo X="-384.2078" Y="-264.5964" Z="12.68723" />
+
+			<RunTo X="-347.7778" Y="-267.8593" Z="12.6875" />
+			<RunTo X="-335.6409" Y="-249.7242" Z="15.3983" />
+			<RunTo X="-332.1484" Y="-281.5436" Z="17.99997" />
+			<RunTo X="-294.8455" Y="-251.9081" Z="14.87621" />
+			<RunTo X="-289.2073" Y="-279.8698" Z="16.24344" />
+			<RunTo X="-269.6289" Y="-258.6306" Z="12.68085" />
+			<RunTo X="-255.5998" Y="-263.6966" Z="17.08641" /> // Grandmaster Vorpil
+
+			<RunTo X="-221.2239" Y="-263.5849" Z="17.08631" />
+			<RunTo X="-157.8642" Y="-290.0771" Z="17.08449" />
+
+
+			<RunTo X="-152.2766" Y="-327.8733" Z="17.08484" />
+			<RunTo X="-156.7327" Y="-378.297" Z="17.08201" />
+			<RunTo X="-156.6276" Y="-463.6895" Z="17.07778" />
+			<RunTo X="-158.0217" Y="-502.6627" Z="15.78184" /> // Murmur
+
+			<RunTo  X="-156.4783" Y="-459.0098" Z="17.0773" />
+
+			<RunTo X="-0.3524668" Y="-0.2714353" Z="-1.129797" /> <!-- Run back to the instance entrance -->
+
+			<CustomBehavior File="Misc\InstanceTimer" Timer="Check" WaitTime="369000" />
+			<CustomBehavior File="MyCTM" X="8.625723" Y="-0.285159" Z="-1.129767" />
+			<CustomBehavior File="WaitTimer" WaitTime="5500" />
+			<While Condition="!(StyxWoW.IsInWorld)" >
+				<CustomBehavior File="WaitTimer" WaitTime="1000" />
+			</While>
+		</If>
+		<CustomBehavior File="RunMacro" Macro="/script ResetInstances()" /> 
+	</While>
+	<!-- End Instance Grind -->
+	
+	<!-- Vendor Routine -->
+	<If Condition="(Me.FreeBagSlots &lt;= 10)" >
+		<CustomBehavior File="Message" Text="Moving to Sell, Repair, Mail" LogColor="Lime" />
+
+		<CustomBehavior File="MyCTM" X="-3558.459" Y="4943.008" Z="-101.0484" />
+		<CustomBehavior File="WaitTimer" WaitTime="500" />
+		<CustomBehavior File="InteractWith" MobId="183294" MobState="DontCare" X="-3556.407" Y="4943.071" Z="-101.1189" />
+		<CustomBehavior File="MyCTM" X="-3533.682" Y="4944.602" Z="-101.396" />
+		<RunTo X="-3522.661" Y="4939.101" Z="-101.396" />
+		<SetVendor>
+			<Vendors>
+				<Vendor Name="Provisioner Tsaalt" Entry="19718" Type="Food" X="-3523.476" Y="4937.63" Z="-101.3944" />
+			</Vendors>
+		</SetVendor>
+		<CustomBehavior File="WaitTimer" WaitTime="1500" />
+		<CustomBehavior File="ForceSetVendor" DoMail="False" DoSell="True" DoRepair="True" />
+		<RunTo X="-3528.487" Y="4943.76" Z="-101.396" />
+		<ClearVendor />
+		<!-- Mailbox jump -->
+		<If Condition="(Me.FreeBagSlots &lt;= 10)" >
+			<CustomBehavior File="Message" Text="\nYou're still under 10 bagslots after selling.\nExecuting mail routine.\n\nIf you do not have a MailTo set, you may want to set one now." LogColor="Red" />
+			<MoveTo Nav="Fly" X="-2944.846" Y="4009.452" Z="5.567399" />
+			<CustomBehavior File="ForcedDismount" />
+			<MoveTo Nav="Run" X="-2933.421" Y="4009.331" Z="-1.294724" />
+			<SetMailbox>
+				<Mailboxes>
+					<Mailbox X="-2929.392" Y="4008.916" Z="-1.389165" />
+				</Mailboxes>
+			</SetMailbox>
+			<CustomBehavior File="WaitTimer" WaitTime="1500" />
+			<CustomBehavior File="ForceSetVendor" DoMail="True" DoSell="False" DoRepair="False" />
+			<MoveTo Nav="Run" X="-2936.408" Y="4010.14" Z="-1.248712" />
+			<ClearMailbox />
+			<Else>
+				<CustomBehavior File="Message" Text="\nSince the mailbox is so far away, we will not mail this time.\nOnce your bags are low enough after vendoring, we will mail." LogColor="Green" />
+			</Else>
+		</If>
+	</If>
+	<!-- End Vendor Routine -->
+
+</While>
+</QuestOrder>
+</HBProfile>

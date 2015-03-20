@@ -5,7 +5,7 @@
 
 
     <QuestOrder>
-    	<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
+
     	<If Condition="Me.IsAlliance">
         	<If Condition="(Me.FreeBagSlots &lt; 40)" >
         		<MoveTo X="-8792.969" Y="611.1144" Z="96.77453" />
@@ -60,7 +60,7 @@
 
             <If Condition="HasItem(45574)">
 			 <!-- Элвинский лес -->
-			 			 <If Condition="Chance(16)">
+			 			 <If Condition="Chance(33)">
 			  				<CustomBehavior File="Message" Text="Направляемся в таверну в Златоземье в Элвинском Лесу" LogColor="Lime" />					
 							<RunTo X="-9465.371" Y="15.71644" Z="56.96337" />
 							<CustomBehavior File="Message" Text="I have reached the innkeeper." LogColor="Lime" />
@@ -69,30 +69,8 @@
 							<CustomBehavior File="SetHearthstone" MobId="295"  X="-9462.663" Y="16.19151" Z="56.96373" />
 							<CustomBehavior File="WaitTimer" WaitTime="1000" />
 
-			<!-- Сторожевой холм -->
-						 <ElseIf Condition="Chance(16)">
-							<CustomBehavior File="Message" Text="Направляемся в таверну на Сторожевой Холм в Западном Краю" LogColor="Lime"/>
-							<MoveTo X="-10650.82" Y="1165.563" Z="34.51858" />
-							<CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
-							<CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
-							<CustomBehavior File="WaitTimer" WaitTime="2000" />
-							<CustomBehavior File="SetHearthstone" MobId="8931"  X="-10653.28" Y="1166.431" Z="34.50514" />
-							<CustomBehavior File="WaitTimer" WaitTime="2000" />				
-						</ElseIf>
-
-			<!-- Красногорье -->
-						 <ElseIf Condition="Chance(16)">
-							<CustomBehavior File="Message" Text="Направляемся в таверну в Приозерье в Красногорье" LogColor="Lime" />								
-							<MoveTo X="-9226.454" Y="-2155.743" Z="63.73067" />
-							<CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
-							<CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
-							<CustomBehavior File="WaitTimer" WaitTime="2000" />
-							<CustomBehavior File="SetHearthstone" MobId="6727"  X="-9226.454" Y="-2155.743" Z="63.73067" />
-							<CustomBehavior File="WaitTimer" WaitTime="2000" />
-						</ElseIf>
-
 			<!-- Штормград -->
-						 <ElseIf Condition="Chance(16)">
+						 <ElseIf Condition="Chance(33)">
 							<CustomBehavior File="Message" Text="Направляемся в таверну в Штормград" LogColor="Lime" />								
 							<MoveTo X="-8866.083" Y="670.7891" Z="97.90375" />
 							<CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
@@ -103,24 +81,13 @@
 						</ElseIf>
 
 			 <!-- Стальгорн -->
-			 			 <ElseIf Condition="Chance(16)">
+			 			 <Else Condition="Chance(33)">
 							<CustomBehavior File="Message" Text="Направляемся в таверну в Златоземье в Стальгорн" LogColor="Lime" />								
 							<MoveTo X="-4841.883" Y="-861.3156" Z="501.9148" />
 							<CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
 							<CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
 							<CustomBehavior File="WaitTimer" WaitTime="2000" />
 							<CustomBehavior File="SetHearthstone" MobId="5111"  X="-4840.674" Y="-857.094" Z="501.9138" />
-							<CustomBehavior File="WaitTimer" WaitTime="2000" />  
-						</ElseIf>
-
-			<!-- Каранос -->
-						 <Else Condition="Chance(16)">
-							<CustomBehavior File="Message" Text="Направляемся в таверну в Каранос в Дун Морог" LogColor="Lime" />								
-							<MoveTo X="-5597.478" Y="-529.421" Z="399.6526" />
-							<CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
-							<CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
-							<CustomBehavior File="WaitTimer" WaitTime="2000" />
-							<CustomBehavior File="SetHearthstone" MobId="1247"  X="-5601.6" Y="-531.203" Z="399.654" />
 							<CustomBehavior File="WaitTimer" WaitTime="2000" />  
 						</Else>
 					</If>	
@@ -295,6 +262,7 @@
    		</If>
 
    		<If Condition="Me.IsHorde">
+   		<!--	<CustomBehavior File="EquipItem" ItemId="39371" /> -->
         	<If Condition="(Me.FreeBagSlots &lt; 40)" >
         		<MoveTo X="1793.673" Y="-4562.047" Z="23.00019"   />
         		<CustomBehavior File="InteractWith" MobId="3315" />
@@ -358,17 +326,6 @@
 			                <CustomBehavior File="WaitTimer" WaitTime="1000" />
 			                <CustomBehavior File="SetHearthstone" MobId="6928"  X="340.3629" Y="-4686.287" Z="16.48929" />
 			                <CustomBehavior File="WaitTimer" WaitTime="1000" />
-			            
-				<!-- Krom' Gar -->
-			            <ElseIf Condition="Chance(20)">
-			                <CustomBehavior File="Message" Text="Moving to the innkeep at Krom' Gar." LogColor="Lime" />                                           
-			                    <RunTo X="879.6248" Y="-17.85691" Z="92.675" />
-			                <CustomBehavior File="Message" Text="I have reached the innkeeper. " LogColor="Lime" />
-			                <CustomBehavior File="Message" Text="Setting my Heartstone." LogColor="Lime" />
-			                <CustomBehavior File="WaitTimer" WaitTime="1000" />
-			                <CustomBehavior File="SetHearthstone" MobId="41892"  X="877.2882" Y="-20.30903" Z="92.67494" />
-			                <CustomBehavior File="WaitTimer" WaitTime="1000" />
-			            </ElseIf>
 				<!-- Mulgore -->
 			            <ElseIf Condition="Chance(20)">
 			                <CustomBehavior File="Message" Text="Moving to the innkeep at Mulgore." LogColor="Lime" />                                                      
@@ -579,8 +536,5 @@
 			</If>
 			-->   
    		</If>
-   		<CustomBehavior File="UserDialog" AllowBotStop="true" SoundCue="Exclamation" SoundCueInterval="10"
-                                Text="Я почти готов к скачкам по подземельям! Осталось только применить на каждом фамильном предмете Старинную наследную обшивку для брони, а на фамильных оружиях Старинные наследные ножны. Интерфейс с фамильками открывается сочетанием клавиш Shift+P. Вкладка
-                                Фамильные предметы. \n\nЕсли в ГБ были деньги, то я потратил 12 500 золотых :)" />		
     </QuestOrder>
 </HBProfile>
