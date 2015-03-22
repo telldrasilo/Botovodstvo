@@ -135,7 +135,7 @@
 	        <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:68673&quot;)" />
 	    </If>
 	    <MoveTo X="-8837.012" Y="612.3355" Z="93.5505" />
-	    <If Condition="CanFly()">
+	    <If Condition="CanFly()" >
 			<CustomBehavior file="FlyTo" X="-8780.529" Y="382.3951" Z="100.8336"  />
 		</If>
 		<CustomBehavior File="ForcedDismount" />
@@ -189,7 +189,7 @@
             </Else>
     	</If>
     	<CustomBehavior File="UserDialog" AllowBotStop="true" SoundCue="Exclamation" SoundCueInterval="15" Text="Я готов лететь в Пандарию, ток что если хочешь сменить специализацию для меня, то сейчас самое время нажать стоп и сделать это. Можно купить вторую специализацию у тренера (где тренер моего класса, можно спросить у стражи), чтобы потом можно было обратно переключить. Рекомендую менять спеки у всех хилящих и танкующих классов на ДД (нанесение урона). Если нажмешь Continue, загружу профиль для квестов в Пандарии" />
-    	<If Condition="CanFly()">
+    	<If Condition="CanFly()" >
     		<<CustomBehavior file="FlyTo" X="-8825.727" Y="628.4407" Z="94.36522" />
     	</If>
 			<CustomBehavior File="FlyTo" DestName="Callboard quest" X="-8830.302" Y="626.3619" Z="94.23802" />
