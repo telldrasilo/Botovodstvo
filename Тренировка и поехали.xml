@@ -47,7 +47,7 @@
         <CustomBehavior File="DeleteItems" Ids="20767" />
         <CustomBehavior File="DeleteItems" Ids="87806" />
         <CustomBehavior File="DeleteItems" Ids="69820" />
-        
+        <CustomBehavior File="RunMacro" Macro="/run for i=1,GetNumQuestLogEntries() do SelectQuestLogEntry(i); SetAbandonQuest(); AbandonQuest(); end" />
         
         
         <MoveTo Nav="Fly" X="-8848.835" Y="500.3212" Z="109.6091" />
@@ -135,7 +135,9 @@
 	        <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:68673&quot;)" />
 	    </If>
 	    <MoveTo X="-8837.012" Y="612.3355" Z="93.5505" />
-		<CustomBehavior file="FlyTo" X="-8780.529" Y="382.3951" Z="100.8336"  />
+	    <If Condition="CanFly()">
+			<CustomBehavior file="FlyTo" X="-8780.529" Y="382.3951" Z="100.8336"  />
+		</If>
 		<CustomBehavior File="ForcedDismount" />
 		<If Condition="Chance(14)">
 			<CustomBehavior File="InteractWith" MobId="43694" InteractByBuyingItemId="18776" WaitTime="5000"
@@ -187,6 +189,12 @@
             </Else>
     	</If>
     	<CustomBehavior File="UserDialog" AllowBotStop="true" SoundCue="Exclamation" SoundCueInterval="15" Text="Я готов лететь в Пандарию, ток что если хочешь сменить специализацию для меня, то сейчас самое время нажать стоп и сделать это. Можно купить вторую специализацию у тренера (где тренер моего класса, можно спросить у стражи), чтобы потом можно было обратно переключить. Рекомендую менять спеки у всех хилящих и танкующих классов на ДД (нанесение урона). Если нажмешь Continue, загружу профиль для квестов в Пандарии" />
+    	<If Condition="CanFly()">
+    		<<CustomBehavior file="FlyTo" X="-8825.727" Y="628.4407" Z="94.36522" />
+    	</If>
+			<CustomBehavior File="FlyTo" DestName="Callboard quest" X="-8830.302" Y="626.3619" Z="94.23802" />
+			<PickUp QuestName="The King's Command" QuestId="29547" GiverName="Hero's Call Board" GiverId="206111" GiverType="Object" X="-8823.851" Y="630.5729" Z="94.136" />
+    	<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[A - Quest] 85-86 The Jade Forest [Kick]" />
     	<Else>
     		<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[A - Quest] 85-86 The Jade Forest [Kick]" />
     	</Else>
