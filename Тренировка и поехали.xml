@@ -24,7 +24,7 @@
 <MailPurple>true</MailPurple>
 <QuestOrder>
 	<If Condition="Me.IsAlliance">
-	<If Condition="(Me.FreeBagSlots &lt; 70)" >
+	<If Condition="Me.FreeBagSlots &lt; 70" >
         <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;Паучок Дымной Паутины&quot;)" />
         <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;Клетка для ворга&quot;)" />
         <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;Worg Carrier&quot;)" />
@@ -188,11 +188,10 @@
                 </If>
             </Else>
     	</If>
-    	<CustomBehavior File="UserDialog" AllowBotStop="true" SoundCue="Exclamation" SoundCueInterval="15" Text="Я готов лететь в Пандарию, ток что если хочешь сменить специализацию для меня, то сейчас самое время нажать стоп и сделать это. Можно купить вторую специализацию у тренера (где тренер моего класса, можно спросить у стражи), чтобы потом можно было обратно переключить. Рекомендую менять спеки у всех хилящих и танкующих классов на ДД (нанесение урона). Если нажмешь Continue, загружу профиль для квестов в Пандарии" />
+    	<CustomBehavior File="UserDialog" AllowBotStop="true" SoundCue="Exclamation" SoundCueInterval="15" Text="Я готов лететь в Пандарию, так что если хочешь сменить специализацию для меня, то сейчас самое время нажать стоп и сделать это. Можно купить вторую специализацию у тренера (где тренер моего класса, можно спросить у стражи), чтобы потом можно было обратно переключить. Рекомендую менять спеки у всех хилящих и танкующих классов на ДД (нанесение урона). Если нажмешь Continue, загружу профиль для квестов в Пандарии" />
     	<If Condition="CanFly()" >
-    		<<CustomBehavior file="FlyTo" X="-8825.727" Y="628.4407" Z="94.36522" />
+    		<CustomBehavior file="FlyTo" X="-8825.727" Y="628.4407" Z="94.36522" />
     	</If>
-			<CustomBehavior File="FlyTo" DestName="Callboard quest" X="-8830.302" Y="626.3619" Z="94.23802" />
 			<PickUp QuestName="The King's Command" QuestId="29547" GiverName="Hero's Call Board" GiverId="206111" GiverType="Object" X="-8823.851" Y="630.5729" Z="94.136" />
     	<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[A - Quest] 85-86 The Jade Forest [Kick]" />
     	<Else>
