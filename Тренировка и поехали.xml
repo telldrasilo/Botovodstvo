@@ -42,6 +42,8 @@
         <CustomBehavior File="DeleteItems" Ids="7191" />
         <CustomBehavior File="DeleteItems" Ids="7806" />
         <CustomBehavior File="DeleteItems" Ids="4903" />
+        <CustomBehavior File="DeleteItems" Ids="43297" />
+        
         	             			
     	<If Condition="(Me.FreeBagSlots &lt; 66)" >
     		<MoveTo X="1793.673" Y="-4562.047" Z="23.00019"   />
@@ -163,7 +165,8 @@
                 </If>
             </Else>
     	</If>
-    	<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[H - Quest] 85-86 The Jade Forest [Kick]" />
+    	<CustomBehavior File="UserDialog" AllowBotStop="false" SoundCue="Exclamation" SoundCueInterval="15" ExpiryAction="InputEnabled_Continue" Text="Я готов лететь в Пандарию, ток что если хочешь сменить специализацию для меня, то е сейчас самое время нажать стоп и сделать это. Если нажмешь Продолжить, загружу профиль для квестов в Пандарии" />
+    	<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[A - Quest] 85-86 The Jade Forest [Kick]" />
 	</If> 
 
 	    <If Condition="Me.IsHorde">
@@ -186,6 +189,7 @@
 			        <CustomBehavior File="DeleteItems" Ids="7191" />
 			        <CustomBehavior File="DeleteItems" Ids="7806" />
 			        <CustomBehavior File="DeleteItems" Ids="4903" />
+			        <CustomBehavior File="DeleteItems" Ids="43297" />
 			        	             			
 		        	<If Condition="(Me.FreeBagSlots &lt; 66)" >
 		        		<MoveTo X="1793.673" Y="-4562.047" Z="23.00019"   />
@@ -307,6 +311,7 @@
 			                </If>
 			            </Else>
 		        	</If>
+		        <CustomBehavior File="UserDialog" AllowBotStop="false" SoundCue="Exclamation" SoundCueInterval="15" ExpiryAction="InputEnabled_Continue" Text="Я готов лететь в Пандарию, ток что если хочешь сменить специализацию для меня, то е сейчас самое время нажать стоп и сделать это. Если нажмешь Продолжить, загружу профиль для квестов в Пандарии" />	
 		        <CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[H - Quest] 85-86 The Jade Forest [Kick]" />
 		    </If>                     
     </QuestOrder>
