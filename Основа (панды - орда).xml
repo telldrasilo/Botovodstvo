@@ -5,7 +5,7 @@
 
 <QuestOrder>
 	<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
-		<If Condition="Me.IsAlliance || Me.Race == WoWRace.Pandaren">
+		<If Condition="Me.IsAlliance">
        		 <If Condition="Me.Level &lt; 15" >
        		 	<CustomBehavior File="EnablePlugin" Names="LogMeOut!" />
 				<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\Classic\[A - Quest] 1-58 [Kick]\[A - Quest] 1-12 Auto-Loader [Kick]" />
@@ -24,7 +24,7 @@
 			</If>
    		</If>
 
-   		<If Condition="Me.IsHorde">
+   		<If Condition="Me.IsHorde || Me.Race == WoWRace.Pandaren">
        		 <If Condition="Me.Level &lt; 15" >
        		 	<CustomBehavior File="EnablePlugin" Names="LogMeOut!" />
        		 		<If Condition="(Me.Race == WoWRace.Undead) &amp;&amp; Me.Level &gt; 12 " >
@@ -57,14 +57,11 @@
              <If Condition="Me.Level &gt; 87" >
             	<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
             	<If Condition="Me.ZoneId == 5785" >
-           			<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[A - Quest] 85-86 The Jade Forest [Kick]" RememberProfile="True" /> 
+           			<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[H - Quest] 85-86 The Jade Forest [Kick]" RememberProfile="True" /> 
            			<Else>
            				<If Condition="!HasSpell(90267) &amp;&amp; Me.Gold &gt;= 250">
 						      <CustomBehavior File="Message" Text="Собираюсь идти тренироваться для полетов" LogColor="Aquamarine" />
 						      <CustomBehavior File="LoadProfile" ProfileName="Тренировка и поехали" />
-						    <Else>
-						    	<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[A - Quest] 85-86 The Jade Forest [Kick]" RememberProfile="True" />
-						    </Else>  
 					    </If>
            			</Else>
            		</If>

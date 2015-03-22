@@ -24,6 +24,7 @@
 <MailPurple>true</MailPurple>
 <QuestOrder>
 	<If Condition="Me.IsAlliance">
+	<If Condition="(Me.FreeBagSlots &lt; 70)" >
         <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;Паучок Дымной Паутины&quot;)" />
         <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;Клетка для ворга&quot;)" />
         <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;Worg Carrier&quot;)" />
@@ -43,12 +44,19 @@
         <CustomBehavior File="DeleteItems" Ids="7806" />
         <CustomBehavior File="DeleteItems" Ids="4903" />
         <CustomBehavior File="DeleteItems" Ids="43297" />
+        <CustomBehavior File="DeleteItems" Ids="20767" />
+        <CustomBehavior File="DeleteItems" Ids="87806" />
+        <CustomBehavior File="DeleteItems" Ids="69820" />
         
-        	             			
-    	<If Condition="(Me.FreeBagSlots &lt; 66)" >
-    		<MoveTo X="1793.673" Y="-4562.047" Z="23.00019"   />
-    		<CustomBehavior File="InteractWith" MobId="3315" />
-        	<CustomBehavior File="Misc\RunLua" NumOfTimes="15" WaitTime="2000" Lua="
+        
+        
+        <MoveTo Nav="Fly" X="-8848.835" Y="500.3212" Z="109.6091" />
+		<CustomBehavior File="ForceTrainRiding" MobId="43769" />
+		<CustomBehavior File="WaitTimer" WaitTime="1000" />
+		<CustomBehavior File="ForceTrainRiding" MobId="43769" />
+		<MoveTo X="-8831.999" Y="480.7449" Z="109.611"  />
+    	<CustomBehavior File="InteractWith" MobId="43768" />
+        <CustomBehavior File="Misc\RunLua" NumOfTimes="15" WaitTime="2000" Lua="
 						if MerchantFrame:IsVisible()==true then
 							if buffer==nil or buffer&gt;4 then buffer=0 end
 							MerchantRepairAllButton:Click()
@@ -62,29 +70,52 @@
 								buffer=buffer+1
 								end
 							end" />
-           	<MoveTo X="1776.639" Y="-4507.056" Z="27.73939" />		
-			<CustomBehavior File="InteractWith" MobId="3369" InteractByBuyingItemId="60335" WaitTime="1000"
-                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-            <CustomBehavior File="InteractWith" MobId="3369" InteractByBuyingItemId="60335" WaitTime="1000"
-                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-            <CustomBehavior File="InteractWith" MobId="3369" InteractByBuyingItemId="60335" WaitTime="1000"
-                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-            <CustomBehavior File="InteractWith" MobId="3369" InteractByBuyingItemId="60335" WaitTime="1000"
-                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-			<CustomBehavior File="InteractWith" MobId="3369" InteractByBuyingItemId="60335" WaitTime="1000"
-                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-            <CustomBehavior File="InteractWith" MobId="3369" InteractByBuyingItemId="60335" WaitTime="1000"
-                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-            <CustomBehavior File="InteractWith" MobId="3369" InteractByBuyingItemId="60335" WaitTime="1000"
-                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />
-            <CustomBehavior File="InteractWith" MobId="3369" InteractByBuyingItemId="60335" WaitTime="1000"
-                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.5787" />		                                     		           
+		
+		<If Condition="Chance(33)">
+			<CustomBehavior File="InteractWith" MobId="43768" InteractByBuyingItemId="25470" WaitTime="5000"
+	                        CollectionDistance="50" X="-8829.18" Y="482.34" Z="109.6159" />
+	        <If Condition="HasItem(25470)">
+	            <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:25470&quot;)" />
+	        </If>
+	        <ElseIf Condition="Chance(33)">
+				<CustomBehavior File="InteractWith" MobId="43768" InteractByBuyingItemId="25471" WaitTime="5000"
+	                            CollectionDistance="50" X="-8829.18" Y="482.34" Z="109.6159" />
+	            <If Condition="HasItem(25471)">
+	                <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:25471&quot;)" />
+	            </If>
+	        </ElseIf>
+	        <Else Condition="Chance(33)">
+				<CustomBehavior File="InteractWith" MobId="43768" InteractByBuyingItemId="25472" WaitTime="5000"
+	                            CollectionDistance="50" X="-8829.18" Y="482.34" Z="109.6159" />
+	            <If Condition="HasItem(25472)">
+	                <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:25472&quot;)" />
+	            </If>
+	        </Else>
+		</If>
+
+    	<If Condition="(Me.FreeBagSlots &lt; 66)" >
+           	<MoveTo X="-8825.759" Y="596.4514" Z="95.57874" />		
+			<CustomBehavior File="InteractWith" MobId="50669" InteractByBuyingItemId="67387" WaitTime="1000"
+                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.57852" />
+			<CustomBehavior File="InteractWith" MobId="50669" InteractByBuyingItemId="67387" WaitTime="1000"
+                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.57852" />
+            <CustomBehavior File="InteractWith" MobId="50669" InteractByBuyingItemId="67387" WaitTime="1000"
+                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.57852" />
+            <CustomBehavior File="InteractWith" MobId="50669" InteractByBuyingItemId="67387" WaitTime="1000"
+                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.57852" />
+            <CustomBehavior File="InteractWith" MobId="50669" InteractByBuyingItemId="67387" WaitTime="1000"
+                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.57852" />
+            <CustomBehavior File="InteractWith" MobId="50669" InteractByBuyingItemId="67387" WaitTime="1000"
+                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.57852" />
+            <CustomBehavior File="InteractWith" MobId="50669" InteractByBuyingItemId="67387" WaitTime="1000"
+                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.57852" />
+            <CustomBehavior File="InteractWith" MobId="50669" InteractByBuyingItemId="67387" WaitTime="1000"
+                            CollectionDistance="50" X="-8827.696" Y="593.5677" Z="95.57852" />                                                                
         </If>
-        <CustomBehavior File="WaitTimer" WaitTime="60000" />
+        <CustomBehavior File="WaitTimer" WaitTime="10000" />
         <CustomBehavior File="DeleteItems" Ids="38145" />
-        <If Condition="(Me.FreeBagSlots &lt; 70)" >
-    		<MoveTo X="1793.673" Y="-4562.047" Z="23.00019"   />
-    		<CustomBehavior File="InteractWith" MobId="3315" />
+        <If Condition="(Me.FreeBagSlots &lt; 66)" >
+    		<CustomBehavior File="InteractWith" MobId="50669" />
         	<CustomBehavior File="Misc\RunLua" NumOfTimes="15" WaitTime="2000" Lua="
 						if MerchantFrame:IsVisible()==true then
 							if buffer==nil or buffer&gt;4 then buffer=0 end
@@ -99,74 +130,67 @@
 								buffer=buffer+1
 								end
 							end" /> 
-		</If>
-                    
+		</If>          
 	    <If Condition="HasItem(68673)">
 	        <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:68673&quot;)" />
 	    </If>
-
-	    <MoveTo X="1799.051" Y="-4359.824" Z="102.4544" />
-		<CustomBehavior File="ForceTrainRiding" MobId="44919" />
-		<CustomBehavior File="WaitTimer" WaitTime="1000" />
-		<CustomBehavior File="ForceTrainRiding" MobId="44919" />
-		<MoveTo X="1804.289" Y="-4343.738" Z="102.1379" />
+	    <MoveTo X="-8837.012" Y="612.3355" Z="93.5505" />
+		<CustomBehavior file="FlyTo" X="-8780.529" Y="382.3951" Z="100.8336"  />
 		<CustomBehavior File="ForcedDismount" />
-		<If Condition="Chance(33)">
-			<CustomBehavior File="InteractWith" MobId="44918" InteractByBuyingItemId="25474" WaitTime="5000"
-	                        CollectionDistance="50" X="-8829.18" Y="482.34" Z="109.6159" />
-	        <If Condition="HasItem(25474)">
-	            <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:25474&quot;)" />
-	        </If>
-	        <ElseIf Condition="Chance(33)">
-				<CustomBehavior File="InteractWith" MobId="44918" InteractByBuyingItemId="25475" WaitTime="5000"
-	                            CollectionDistance="50" X="-8829.18" Y="482.34" Z="109.6159" />
-	            <If Condition="HasItem(25475)">
-	                <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:25475&quot;)" />
-	            </If>
-	        </ElseIf>
-	        <Else Condition="Chance(33)">
-				<CustomBehavior File="InteractWith" MobId="44918" InteractByBuyingItemId="25476" WaitTime="5000"
-	                            CollectionDistance="50" X="-8829.18" Y="482.34" Z="109.6159" />
-	            <If Condition="HasItem(25476)">
-	                <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:25476&quot;)" />
-	            </If>
-	        </Else>
-		</If>
-		
-        <If Condition="CanFly()">
-			<CustomBehavior file="FlyTo" X="2075.269" Y="-4572.977" Z="49.25408"  />
-		</If>
-		<CustomBehavior File="ForcedDismount" />
-		<If Condition="Chance(25)">
-			<CustomBehavior File="InteractWith" MobId="3362" InteractByBuyingItemId="1132" WaitTime="5000"
+		<If Condition="Chance(14)">
+			<CustomBehavior File="InteractWith" MobId="43694" InteractByBuyingItemId="18776" WaitTime="5000"
                             CollectionDistance="50" X="2073.05" Y="-4575.08" Z="49.25342" />
-            <If Condition="HasItem(1132)">
-                <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:1132&quot;)" />
+            <If Condition="HasItem(18776)">
+                <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:18776&quot;)" />
             </If>
-            <ElseIf Condition="Chance(25)">
-				<CustomBehavior File="InteractWith" MobId="3362" InteractByBuyingItemId="5665" WaitTime="5000"
+            <ElseIf Condition="Chance(14)">
+				<CustomBehavior File="InteractWith" MobId="43694" InteractByBuyingItemId="18777" WaitTime="5000"
                                 CollectionDistance="50" X="2073.05" Y="-4575.08" Z="49.25342" />
-                <If Condition="HasItem(5665)">
-                    <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:5665&quot;)" />
+                <If Condition="HasItem(18777)">
+                    <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:18777&quot;)" />
                 </If>
             </ElseIf>
-            <ElseIf Condition="Chance(25)">
-				<CustomBehavior File="InteractWith" MobId="3362" InteractByBuyingItemId="5668" WaitTime="5000"
+            <ElseIf Condition="Chance(14)">
+				<CustomBehavior File="InteractWith" MobId="43694" InteractByBuyingItemId="18778" WaitTime="5000"
                                 CollectionDistance="50" X="2073.05" Y="-4575.08" Z="49.25342" />
-                <If Condition="HasItem(5668)">
-                    <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:5668&quot;)" />
+                <If Condition="HasItem(18778)">
+                    <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:18778&quot;)" />
                 </If>
             </ElseIf>
-            <Else Condition="Chance(25)">
-				<CustomBehavior File="InteractWith" MobId="3362" InteractByBuyingItemId="46099" WaitTime="5000"
+            <ElseIf Condition="Chance(14)">
+				<CustomBehavior File="InteractWith" MobId="43694" InteractByBuyingItemId="2414" WaitTime="5000"
                                 CollectionDistance="50" X="2073.05" Y="-4575.08" Z="49.25342" />
-                <If Condition="HasItem(46099)">
-                    <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:46099&quot;)" />
+                <If Condition="HasItem(2414)">
+                    <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:2414&quot;)" />
+                </If>
+            </ElseIf>
+            <ElseIf Condition="Chance(14)">
+				<CustomBehavior File="InteractWith" MobId="43694" InteractByBuyingItemId="5655" WaitTime="5000"
+                                CollectionDistance="50" X="2073.05" Y="-4575.08" Z="49.25342" />
+                <If Condition="HasItem(5655)">
+                    <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:5655&quot;)" />
+                </If>
+            </ElseIf>
+            <ElseIf Condition="Chance(14)">
+				<CustomBehavior File="InteractWith" MobId="43694" InteractByBuyingItemId="5656" WaitTime="5000"
+                                CollectionDistance="50" X="2073.05" Y="-4575.08" Z="49.25342" />
+                <If Condition="HasItem(5656)">
+                    <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:5656&quot;)" />
+                </If>
+            </ElseIf>
+            <Else Condition="Chance(14)">
+				<CustomBehavior File="InteractWith" MobId="43694" InteractByBuyingItemId="2411" WaitTime="5000"
+                                CollectionDistance="50" X="2073.05" Y="-4575.08" Z="49.25342" />
+                <If Condition="HasItem(2411)">
+                    <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:2411&quot;)" />
                 </If>
             </Else>
     	</If>
-    	<CustomBehavior File="UserDialog" AllowBotStop="false" SoundCue="Exclamation" SoundCueInterval="15" ExpiryAction="InputEnabled_Continue" Text="Я готов лететь в Пандарию, ток что если хочешь сменить специализацию для меня, то е сейчас самое время нажать стоп и сделать это. Если нажмешь Продолжить, загружу профиль для квестов в Пандарии" />
-    	<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[A - Quest] 85-86 The Jade Forest [Kick]" />
+    	<CustomBehavior File="UserDialog" AllowBotStop="true" SoundCue="Exclamation" SoundCueInterval="15" Text="Я готов лететь в Пандарию, ток что если хочешь сменить специализацию для меня, то сейчас самое время нажать стоп и сделать это. Можно купить вторую специализацию у тренера (где тренер моего класса, можно спросить у стражи), чтобы потом можно было обратно переключить. Рекомендую менять спеки у всех хилящих и танкующих классов на ДД (нанесение урона). Если нажмешь Continue, загружу профиль для квестов в Пандарии" />
+    	<Else>
+    		<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[A - Quest] 85-86 The Jade Forest [Kick]" />
+    	</Else>
+    </If>	
 	</If> 
 
 	    <If Condition="Me.IsHorde">
@@ -311,7 +335,8 @@
 			                </If>
 			            </Else>
 		        	</If>
-		        <CustomBehavior File="UserDialog" AllowBotStop="false" SoundCue="Exclamation" SoundCueInterval="15" ExpiryAction="InputEnabled_Continue" Text="Я готов лететь в Пандарию, ток что если хочешь сменить специализацию для меня, то е сейчас самое время нажать стоп и сделать это. Если нажмешь Продолжить, загружу профиль для квестов в Пандарии" />	
+		       	
+		        <CustomBehavior File="UserDialog" AllowBotStop="false" SoundCue="Exclamation" SoundCueInterval="15" ExpiryAction="InputEnabled_Continue" Text="Я готов лететь в Пандарию, ток что если хочешь сменить специализацию для меня, то сейчас самое время нажать стоп и сделать это. Если нажмешь Продолжить, загружу профиль для квестов в Пандарии" />	
 		        <CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\MoP\[H - Quest] 85-86 The Jade Forest [Kick]" />
 		    </If>                     
     </QuestOrder>
