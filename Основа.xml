@@ -10,7 +10,7 @@
        		 	<CustomBehavior File="EnablePlugin" Names="LogMeOut!" />
 				<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\Classic\[A - Quest] 1-58 [Kick]\[A - Quest] 1-12 Auto-Loader [Kick]" />
    			</If>
-   			<If Condition="Me.Level == 15" >
+   			<If Condition="Me.Level == 15 || (Me.Level &gt; 15 &amp;&amp; Me.Level &lt; 20)" >
    				<CustomBehavior File="DisablePlugin" Names="LogMeOut!" />
    				<If Condition="HasItem(6948)">
 					<CustomBehavior File="Message" Text="Телепорт домой" LogColor="Fuchsia" />
@@ -32,7 +32,7 @@
        		 		</If>
 				<CustomBehavior File="LoadProfile" ProfileName="kiks\Questing Profile Pack\Classic\[H - Quest] 1-58 [Kick]\[H - Quest] 1-12 Auto-Loader [Kick]" />
    			</If>
-   			<If Condition="Me.Level == 15" >
+   			<If Condition="Me.Level == 15 || (Me.Level &gt; 15 &amp;&amp; Me.Level &lt; 20)" >
    				<If Condition="HasItem(6948)">
 					<CustomBehavior File="Message" Text="Телепорт домой" LogColor="Fuchsia" />
 					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />				
